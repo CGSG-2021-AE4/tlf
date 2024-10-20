@@ -1,7 +1,9 @@
 import $ from "jquery";
-import { loaded } from "./load";
+import { loaded, loadHTML } from "./load";
 import { setBlur } from "./background";
-import { PageName } from "./page";
+import { Page, PageName } from "./pages/page";
+
+import { PageManager } from "./pages/page_manager";
 
 
 // $("button.SetBlur").on("click", function() {
@@ -18,19 +20,10 @@ function main() {
   console.log("Start");
   
   // Remove loading
-  setBlur(false);
-  $(".pageLoader").addClass("hidden");
-
-  //var pageName: PageName = "unknown";
 
   console.log(window.location.pathname)
+
+  var mng = new PageManager();
 }
 
-function waitLoadAndMain() {
- if (!loaded())
-   window.setTimeout(waitLoadAndMain, 100);
- else
-   main();
-}
-
-waitLoadAndMain()
+loadHTML(main);

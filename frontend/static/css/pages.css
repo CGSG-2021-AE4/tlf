@@ -1,13 +1,40 @@
-.pageLoader {
-  position: inherit;
-  
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  
+.page {
+  flex: 1;
+}
+
+.pageIndex {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+/*@import url('//fonts.googleapis.com/css2?family=Fugaz+One&display=swap');*/
+
+.fugaz-one-regular {
+  font-family: "Fugaz One", sans-serif;
+  font-weight: 400;
+  font-size: 6em;
+  font-style: normal;
+  color: var(--accent-color);
+}
+
+svg#PlayButton {
+  fill: var(--accent-color);
+}
+
+button.iconButton {
+  background-color: transparent;
+  border: none;
+
+  transition: transform 0.1s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+button.playStartButton {
+  width: 8em;
+  height: 8em;
 }

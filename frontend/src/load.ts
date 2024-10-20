@@ -1,17 +1,14 @@
 import $ from "jquery";
 
 // Global variable for loading state
-var pagesToLoad = 0; // In case nothing is need to be loaded
+var loadingPages = 0; // In case nothing is need to be loaded
 
 // Converts tags: `<load src="..."></load>` into html from ... file
-export function loadHTML() {
+export async function loadHTML(onPagesLoad: () => void ) {
   var elements = $("load");
-  
-  pagesToLoad = elements.length;
   
   for (var i = 0; i < elements.length; i++) {
     var e = elements[i];
-    
     var file = e.getAttribute("src");
     
     if (file) {
@@ -21,15 +18,20 @@ export function loadHTML() {
           if (this.status == 200) {
             var newE = $.parseHTML(this.responseText);
             e.replaceWith(...newE);
+            loadHTML(onPagesLoad); // Again
           }
           if (this.status == 404) {
             e.innerHTML = "Page not found.";
           }
-          loadHTML(); // Again
+          loadingPages -= 1;
+          if (loadingPages == 0) {
+            onPagesLoad();
+          }
         }
       }
       req.open("GET", file, true);
       req.send();
+      loadingPages += 1;
       return; // We will call this function again after we change it
     }
   }
@@ -37,10 +39,10 @@ export function loadHTML() {
 
 // Returns true if there is no pages to load
 export function loaded(): boolean {
-  return pagesToLoad == 0;
+  return loadingPages == 0;
 }
 
 // Amount of pages waiting to load
 export function count(): number {
-  return pagesToLoad;
+  return loadingPages;
 }
