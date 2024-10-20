@@ -1,13 +1,17 @@
 // Possible pages
 
-export type PageName = "welcome" | "play" | "settings";
+export type PageName = "index" | "play" | "settings" | "unknown";
 
 type PageProps = {
-  name: PageName;
-  path: string;
-  element: JQuery;
+
 }
 
 async function empty(): Promise<void> {
   return;
+}
+
+class Page {
+  name: PageName;
+  path: string;
+  element: JQuery;
 }

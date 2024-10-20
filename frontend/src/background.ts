@@ -1,7 +1,7 @@
 import $ from "jquery";
 
 export function setBlur(doBlur: boolean) {
-  if (doBlur) {
+  if (!doBlur) {
     $(".background")
     .css("filter", "none")
     .css("-webkit-filter", "none");

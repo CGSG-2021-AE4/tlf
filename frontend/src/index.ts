@@ -1,24 +1,36 @@
 import $ from "jquery";
 import { loaded } from "./load";
 import { setBlur } from "./background";
+import { PageName } from "./page";
 
-console.log("SDFSDFSDF");
-var isBlurred: boolean = false;
 
-$("button.SetBlur").on("click", function() {
-  isBlurred = !isBlurred;
-  setBlur(isBlurred);
-});
+// $("button.SetBlur").on("click", function() {
+  //   isBlurred = !isBlurred;
+  //   setBlur(isBlurred);
+  // });
+  
+  // $("button.SetPath").on("click", function() {
+    //   var page = "hihih";
+    //   window.history.replaceState({}, page + " page", page);
+    // });
 
-$("button.SetPath").on("click", function() {
-  var page = "hihih";
-  window.history.replaceState({}, page + " page", page);
-});
-//
-//function waitLoadAndMain() {
-//  if (!loaded())
-//    window.setTimeout(waitLoadAndMain, 50);
-//  else
-//    main();
-//}
-//waitLoadAndMain()
+function main() {
+  console.log("Start");
+  
+  // Remove loading
+  setBlur(false);
+  $(".pageLoader").addClass("hidden");
+
+  //var pageName: PageName = "unknown";
+
+  console.log(window.location.pathname)
+}
+
+function waitLoadAndMain() {
+ if (!loaded())
+   window.setTimeout(waitLoadAndMain, 100);
+ else
+   main();
+}
+
+waitLoadAndMain()

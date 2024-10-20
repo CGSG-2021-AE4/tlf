@@ -11,8 +11,7 @@ export function loadHTML() {
   
   for (var i = 0; i < elements.length; i++) {
     var e = elements[i];
-    console.log("sldkfhsdkjfh");
-
+    
     var file = e.getAttribute("src");
     
     if (file) {
