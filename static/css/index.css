@@ -11,7 +11,7 @@ body {
   background-image: url("../../bin/imgs/sky1.jpg");
   
   z-index: -10;
-  position:fixed;
+  position: fixed;
 
   /* For correct blur without borders*/
   left: var(--blur-offset);
@@ -30,4 +30,14 @@ body {
   -webkit-filter: none;
 
   transition: filter 0.5s;
+}
+
+.app {
+  z-index: -10;
+  position: fixed;
+
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }

@@ -9,6 +9,7 @@
   "author": "AE4",
   "license": "ISC",
   "dependencies": {
+    "@types/jquery": "^3.5.31",
     "jquery": "^3.7.1"
   },
   "devDependencies": {

@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 export function setBlur(doBlur: boolean) {
   if (doBlur) {
     $(".background")
