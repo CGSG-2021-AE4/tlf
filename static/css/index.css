@@ -1,10 +1,33 @@
-body {
-  position: fixed;
+:root {
+  --blur-r: 8px;
+  --blur-offset: -12px;
+}
 
-  left: 0px;
-  right: 0;
-  top: 0;
-  bottom: 0;
+body {
+  margin: 0;
+}
+
+.background {
+  background-image: url("../../bin/imgs/sky1.jpg");
   
-  background-color: blue;
+  z-index: -10;
+  position:fixed;
+
+  /* For correct blur without borders*/
+  left: var(--blur-offset);
+  top: var(--blur-offset);
+  right: var(--blur-offset);
+  bottom: var(--blur-offset);
+
+  /* Image layout */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+  /* Values for background blur */
+  filter: none;
+  -webkit-filter: none;
+
+  transition: filter 0.5s;
 }
