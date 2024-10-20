@@ -1,0 +1,7 @@
+dist/
+Makefile
+go.sum
+.git/
+.vscode/
+node_modules/
+package-lock.json
