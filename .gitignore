@@ -1,0 +1,15 @@
+# Common
+.git/
+**/.vscode/
+**/Makefile
+
+# GO
+go.sum
+out/
+
+# JS
+**/node_modules/
+**/package-lock.json
+**/dist
+
+

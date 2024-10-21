@@ -34,6 +34,7 @@ export class PageManager implements PageSwitcher {
     this.CurPage.onEnable(this);
     setBlur(this.CurPage.needBlur)
     this.CurPage.element.removeClass("hidden");
+    history.pushState({}, this.CurPage.name, this.CurPage.path);
   }
 
   // Sets loading animation

@@ -17,10 +17,10 @@ func main() {
 	router.StaticFile("/favicon.ico", "./resources/favicon.ico")
 
 	router.GET("/", func(c *gin.Context) {
-		c.File("frontend/index.html")
+		c.File("frontend/dist/index.html")
 	})
 	router.GET("/:page", func(c *gin.Context) {
-		c.File("frontend/index.html")
+		c.File("frontend/dist/index.html")
 	})
 
 	router.Run(":8080")

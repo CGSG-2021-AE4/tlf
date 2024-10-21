@@ -1,4 +1,5 @@
 const esbuild = require("esbuild")
+const { loadHTML } = require("./src/utils/node_loader");
 
 esbuild
   .build({
@@ -8,5 +9,8 @@ esbuild
     minify: false,
     plugins: [],
   })
-  .then(() => console.log("Build completed."))
+  .then(() => console.log("JS Build completed."))
   .catch(()=> process.exit(1));
+
+// Compile html (selfmade)
+loadHTML("./static/html/index.html", "./dist/index.html").then(() => console.log("HTML Build completed."));

@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { loaded, loadHTML } from "./load";
+import { loaded, loadHTML } from "./utils/loader";
 import { setBlur } from "./background";
 import { Page, PageName } from "./pages/page";
 
@@ -25,5 +25,6 @@ function main() {
 
   var mng = new PageManager();
 }
+main();
 
-loadHTML(main);
+//loadHTML(main);

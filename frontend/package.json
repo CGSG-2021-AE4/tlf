@@ -10,7 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "@types/jquery": "^3.5.31",
-    "jquery": "^3.7.1"
+    "jquery": "^3.7.1",
+    "jsdom": "^25.0.1",
+    "node-html-parser": "^6.1.13"
   },
   "devDependencies": {
     "esbuild": "^0.24.0"
