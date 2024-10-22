@@ -1,9 +1,19 @@
+@import url(vars.css);
 @import url(pages.css);
-@import url(colors.css);
+@import url(components.css);
+@import url(tags.css);
 
 :root {
   --blur-r: 8px;
   --blur-offset: -12px;
+}
+
+.fugaz-one-regular {
+  font-family: var(--accent-font);
+  font-weight: 400;
+  font-size: 6em;
+  font-style: normal;
+  color: var(--main-color);
 }
 
 body {
@@ -74,7 +84,7 @@ body {
 .loader {
   width: 60px;
   aspect-ratio: 2;
-  --_g: no-repeat radial-gradient(circle closest-side, var(--accent-color) 90%, #0000);
+  --_g: no-repeat radial-gradient(circle closest-side, var(--main-color) 90%, #0000);
   background: 
     var(--_g) 0%   50%,
     var(--_g) 50%  50%,

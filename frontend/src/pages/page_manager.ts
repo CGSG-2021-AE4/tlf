@@ -1,11 +1,12 @@
 import $ from "jquery";
 import { Page, PageName, PageSwitcher } from "./page";
-import { setBlur } from "../background";
+import { setBlur } from "../utils/background";
 import { CreateIndexPage } from "./";
 import { CreatePlayPage } from "./play";
+import { CreateSettingsPage } from "./settings";
 
 export class PageManager implements PageSwitcher {
-  Pages: Record<PageName, Page>;
+  public Pages: Record<PageName, Page>;
   CurPage: Page | null;
   isLoading: boolean;
 
@@ -14,6 +15,7 @@ export class PageManager implements PageSwitcher {
     this.Pages = {
       index: CreateIndexPage(),
       play: CreatePlayPage(),
+      settings: CreateSettingsPage(),
     };
 
     this.isLoading = true; // Because after start it is loading
@@ -22,6 +24,11 @@ export class PageManager implements PageSwitcher {
     // Calculate current page and switch to it
     // ...
     this.setLoading(false);
+    if (window.location.pathname == "/settings")
+      this.switchPage("settings");
+    else if (window.location.pathname == "/play")
+      this.switchPage("play");
+    else
     this.switchPage("index");
   }
 
@@ -46,3 +53,5 @@ export class PageManager implements PageSwitcher {
       $(".loadScreen").removeClass("hidden");
   }
 }
+
+export var pageManager = new PageManager();
