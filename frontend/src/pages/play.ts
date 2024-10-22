@@ -1,7 +1,7 @@
 import $ from "jquery";
-import { Page } from "./page";
+import { Page, PageSwitcher } from "./page";
 
-export function CreatePlayPage(): Page {
+export function CreatePlayPage(ps: PageSwitcher): Page {
   return {
     name: "play",
     title: "LOFI radio",

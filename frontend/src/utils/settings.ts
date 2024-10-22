@@ -1,5 +1,0 @@
-// Global settings
-
-var settings = {
-
-};

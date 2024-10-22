@@ -13,9 +13,9 @@ export class PageManager implements PageSwitcher {
   constructor() {
     // Init static data
     this.Pages = {
-      index: CreateIndexPage(),
-      play: CreatePlayPage(),
-      settings: CreateSettingsPage(),
+      index: CreateIndexPage(this),
+      play: CreatePlayPage(this),
+      settings: CreateSettingsPage(this),
     };
 
     this.isLoading = true; // Because after start it is loading
@@ -38,7 +38,7 @@ export class PageManager implements PageSwitcher {
       this.CurPage.element.addClass("hidden");
     }
     this.CurPage = this.Pages[page]
-    this.CurPage.onEnable(this);
+    this.CurPage.onEnable();
     setBlur(this.CurPage.needBlur)
     this.CurPage.element.removeClass("hidden");
     history.pushState({}, this.CurPage.name, this.CurPage.path);
