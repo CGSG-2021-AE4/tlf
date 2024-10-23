@@ -4,4 +4,12 @@
   --second-color: #b89c9c83;
   --accent-color: #f06c6c;
   --accent-font: "Fugaz One", sans-serif;
+  --icon-size: 1.1em;
+}
+
+/* Example - use it later */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #00000044;
+  }
 }

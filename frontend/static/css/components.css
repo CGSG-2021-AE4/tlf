@@ -3,3 +3,8 @@ button.playStartButton {
   width: 8em;
   height: 8em;
 }
+
+button.settingsButton, button.SoundButton {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}

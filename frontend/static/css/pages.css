@@ -5,6 +5,7 @@
 .valueLine {
   display: flex;
   justify-content: space-between;
+  margin-block: 1em;
 }
 
 /********** Index page **********/
