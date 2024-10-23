@@ -13,9 +13,9 @@ export class PageManager implements PageSwitcher {
   constructor() {
     // Init static data
     this.Pages = {
-      index: CreateIndexPage(this),
-      play: CreatePlayPage(this),
-      settings: CreateSettingsPage(this),
+      index: CreateIndexPage(),
+      play: CreatePlayPage(),
+      settings: CreateSettingsPage(),
     };
 
     this.isLoading = true; // Because after start it is loading
@@ -24,12 +24,25 @@ export class PageManager implements PageSwitcher {
     // Calculate current page and switch to it
     // ...
     this.setLoading(false);
-    if (window.location.pathname == "/settings")
+    this.updatePage();
+
+    // Set callback on url change
+    window.onpopstate = this.updatePage;
+  }
+
+  // Switch page based on current url
+  updatePage() {
+    switch (window.location.pathname) {
+    case "/settings":
       this.switchPage("settings");
-    else if (window.location.pathname == "/play")
+      break;
+    case "/play":
       this.switchPage("play");
-    else
-    this.switchPage("index");
+      break;
+    default:
+      this.switchPage("index");
+      break;
+    }
   }
 
   switchPage(page: PageName) {

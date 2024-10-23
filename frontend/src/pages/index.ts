@@ -1,7 +1,7 @@
 import $ from "jquery";
 import { Page, PageSwitcher } from "./page";
 
-export function CreateIndexPage(ps: PageSwitcher): Page {
+export function CreateIndexPage(): Page {
   return {
     name: "index",
     title: "LOFI radio",

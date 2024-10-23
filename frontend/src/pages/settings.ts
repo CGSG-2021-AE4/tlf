@@ -3,7 +3,7 @@ import { Page, PageSwitcher } from "./page";
 import { BindPushButton } from "../components/push_button";
 import { BindRadioButton, RadioButtons } from "../components/radio_button";
 
-export function CreateSettingsPage(ps: PageSwitcher): Page {
+export function CreateSettingsPage(): Page {
   BindPushButton($("#testButton"), true, (p)=> { console.log(p);});
   BindRadioButton([$("#radioButton1"), $("#radioButton2"), $("#radioButton3"), $("#radioButton4")], 1, (i)=>{ console.log(i); })
   
