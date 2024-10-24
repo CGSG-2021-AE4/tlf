@@ -1,0 +1,29 @@
+
+.background {
+  z-index: -10;
+  position: fixed;
+
+  /* For correct blur without borders*/
+  left: var(--blur-offset);
+  top: var(--blur-offset);
+  right: var(--blur-offset);
+  bottom: var(--blur-offset);
+  display: flex;
+
+  /* Image layout */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+  /* Values for background blur */
+  filter: blur(var(--blur-r));
+  -webkit-filter: blur(var(--blur-r));
+
+  transition: opacity linear 0.6s, filter 0.5s;
+}
+
+.quick_transparent {
+  opacity: 0;
+  transition: opacity 0s;
+}

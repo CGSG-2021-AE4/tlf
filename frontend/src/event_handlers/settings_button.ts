@@ -1,6 +1,6 @@
 import $ from "jquery";
-import { pageManager } from "../pages/page_manager";
+import { pages } from "../systems/pages";
 
 $(".settingsButton").on("click", function () {
-  pageManager.switchPage("settings");
+  pages.switchPage("settings");
 });

@@ -2,6 +2,7 @@
 @import url(pages.css);
 @import url(components.css);
 @import url(tags.css);
+@import url(background.css);
 
 :root {
   --blur-r: 8px;
@@ -20,30 +21,6 @@ body {
   margin: 0;
 }
 
-.background {
-  background-image: url("../imgs/sky1.jpg");
-  
-  z-index: -10;
-  position: fixed;
-
-  /* For correct blur without borders*/
-  left: var(--blur-offset);
-  top: var(--blur-offset);
-  right: var(--blur-offset);
-  bottom: var(--blur-offset);
-
-  /* Image layout */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-
-  /* Values for background blur */
-  filter: blur(var(--blur-r));
-  -webkit-filter: blur(var(--blur-r));
-
-  transition: filter 0.5s;
-}
 
 .app {
   z-index: -10;

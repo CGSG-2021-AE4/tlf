@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { Page, PageSwitcher } from "./page";
+import { Page } from "./page";
 import { BindPushButton } from "../components/push_button";
 import { BindRadioButton, RadioButtons } from "../components/radio_button";
 

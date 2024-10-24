@@ -1,6 +1,6 @@
 import $ from "jquery";
-import { config } from "../utils/config";
-import { audio } from "../utils/audio";
+import { config } from "../systems/config";
+import { audio } from "../systems/audio";
 
 // Sound volume icon id will speed up check
 type SoundIcon = "#noSound" | "#lowVolume" | "#highVolume";
@@ -15,15 +15,15 @@ function ChangeSoundIcon(newIcon: SoundIcon) {
 
 // Checks and then changes
 function UpdateSoundIcon() {
-  audio.setVolume(config.soundVolume * Number(config.soundEnabled));
+  audio.setVolume(config.state.soundVolume * Number(config.state.soundEnabled));
 
-  if (!config.soundEnabled || config.soundVolume == 0) {
+  if (!config.state.soundEnabled || config.state.soundVolume == 0) {
     if (curIcon != "#noSound") {
       ChangeSoundIcon("#noSound");
     }
     return;
   }
-  if (config.soundVolume < 0.5) {
+  if (config.state.soundVolume < 0.5) {
     if (curIcon != "#lowVolume") {
       ChangeSoundIcon("#lowVolume");
     }
@@ -33,24 +33,24 @@ function UpdateSoundIcon() {
 }
 
 $("#soundRange").on("input", (e) => {
-  config.soundEnabled = true;
-  config.soundVolume = Number($("#soundRange").val());
+  config.state.soundEnabled = true;
+  config.state.soundVolume = Number($("#soundRange").val());
   UpdateSoundIcon();
 });
 
 $("#soundRange").on("change", (e) => {
-  config.soundVolume = Number($("#soundRange").val());
-  if (config.soundVolume == 0) {
-    config.soundVolume = 0.1;
-    config.soundEnabled = false;
+  config.state.soundVolume = Number($("#soundRange").val());
+  if (config.state.soundVolume == 0) {
+    config.state.soundVolume = 0.1;
+    config.state.soundEnabled = false;
   }
   UpdateSoundIcon();
 });
 
 $("#soundButton").on("click", (e) => {
-  config.soundEnabled = !config.soundEnabled;
-  if (config.soundEnabled) {
-    $("#soundRange").val(config.soundVolume);
+  config.state.soundEnabled = !config.state.soundEnabled;
+  if (config.state.soundEnabled) {
+    $("#soundRange").val(config.state.soundVolume);
   } else {
     $("#soundRange").val(0);
   }
@@ -59,6 +59,6 @@ $("#soundButton").on("click", (e) => {
 
 
 // Initialization
-$("#soundRange").val(config.soundVolume);
+$("#soundRange").val(config.state.soundVolume);
 UpdateSoundIcon();
-audio.setVolume(config.soundVolume * Number(config.soundEnabled));
+audio.setVolume(config.state.soundVolume * Number(config.state.soundEnabled));

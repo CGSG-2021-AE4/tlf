@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { Page, PageSwitcher } from "./page";
+import { Page } from "./page";
 
 export function CreatePlayPage(): Page {
   return {
