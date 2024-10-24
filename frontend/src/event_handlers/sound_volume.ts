@@ -1,5 +1,6 @@
 import $ from "jquery";
 import { config } from "../utils/config";
+import { audio } from "../utils/audio";
 
 // Sound volume icon id will speed up check
 type SoundIcon = "#noSound" | "#lowVolume" | "#highVolume";
@@ -14,6 +15,8 @@ function ChangeSoundIcon(newIcon: SoundIcon) {
 
 // Checks and then changes
 function UpdateSoundIcon() {
+  audio.setVolume(config.soundVolume * Number(config.soundEnabled));
+
   if (!config.soundEnabled || config.soundVolume == 0) {
     if (curIcon != "#noSound") {
       ChangeSoundIcon("#noSound");
@@ -58,3 +61,4 @@ $("#soundButton").on("click", (e) => {
 // Initialization
 $("#soundRange").val(config.soundVolume);
 UpdateSoundIcon();
+audio.setVolume(config.soundVolume * Number(config.soundEnabled));
