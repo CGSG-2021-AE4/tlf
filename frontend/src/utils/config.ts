@@ -1,4 +1,5 @@
 import $ from "jquery";
+import Cookies from "js-cookie";
 
 export interface GlobalConfig {
   playPageBlur: boolean;
@@ -13,14 +14,16 @@ export const defaultConfig: GlobalConfig = {
   soundEnabled: true,
 };
 
+const valueName = "tlf";
 
 // Get config from cookies
-var newConfig: GlobalConfig = defaultConfig;
-
-try {
-  newConfig = JSON.parse(document.cookie);
-} catch(e) {
+var newConfig: GlobalConfig;
+var newC = Cookies.get(valueName);
+if (newC == undefined) {
   console.log("failed to load config from cookies - use default")
+  newConfig = defaultConfig;
+} else {
+  newConfig = JSON.parse(newC);
 }
 
 export var config: GlobalConfig = newConfig;
@@ -28,5 +31,6 @@ export var config: GlobalConfig = newConfig;
 
 // Save config to cockies before unload
 $(window).on("beforeunload", () => { 
-  document.cookie = JSON.stringify(config);
+  Cookies.set(valueName, JSON.stringify(config));
+  //document.cookie = ;
 })

@@ -11,6 +11,7 @@
   "dependencies": {
     "@types/jquery": "^3.5.31",
     "jquery": "^3.7.1",
+    "js-cookie": "^3.0.5",
     "jsdom": "^25.0.1",
     "node-html-parser": "^6.1.13"
   },
