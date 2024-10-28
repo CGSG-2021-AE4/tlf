@@ -17,12 +17,20 @@ class PageSystem implements PageSystemI {
   isLoading: boolean;
 
   constructor() {
-    // Init static data
+    // Init pages
     this.pages = {
       index: CreateIndexPage(),
       play: CreatePlayPage(),
       settings: CreateSettingsPage(),
     };
+
+    // Setup pages
+    console.log(Object.keys(this.pages));
+    Object.keys(this.pages).map((key) => {
+      console.log(key);
+      this.pages[key].element.addClass("hidden").addClass("transparent");
+    });
+
 
     this.isLoading = true; // Because after start it is loading
     this.CurPage = null; // By default there is no current page
@@ -56,8 +64,11 @@ class PageSystem implements PageSystemI {
       return;
     this.CurPage.onEnable();
     background.setBlur(this.CurPage.needBlur)
-    this.CurPage.element.removeClass("hidden").addClass("active").removeClass("transparent");
-
+    this.CurPage.element.removeClass("hidden");
+    window.setTimeout(() => { // So css is able to update and smooth appearing will play
+      if (this.CurPage != null)
+        this.CurPage.element.removeClass("transparent");
+    }, 1);
   }
 
   switchPage(page: PageName) {
@@ -72,7 +83,6 @@ class PageSystem implements PageSystemI {
       if (this.CurPage == null)
         return;
       this.CurPage.element.off("transitionend");
-      $(e.target).removeClass("active");
       $(e.target).addClass("hidden");
       this.activateCurPage();
     });
