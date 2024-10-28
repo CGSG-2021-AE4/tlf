@@ -47,6 +47,16 @@ $("#soundRange").on("change", (e) => {
   UpdateSoundIcon();
 });
 
+$("#soundRange").on("wheel", (e) => {
+  if (e.originalEvent as WheelEvent) {
+    var value = config.state.soundVolume + (e.originalEvent as WheelEvent).deltaY / 100 * -0.07;
+    value = Math.max(Math.min(value, 1), 0);
+    config.state.soundVolume = value;
+    $("#soundRange").val(config.state.soundVolume);
+    UpdateSoundIcon();
+  }
+});
+
 $("#soundButton").on("click", (e) => {
   config.state.soundEnabled = !config.state.soundEnabled;
   if (config.state.soundEnabled) {
