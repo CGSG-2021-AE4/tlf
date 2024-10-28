@@ -3,8 +3,12 @@ import Cookies from "js-cookie";
 
 // More temporary values like sound volume
 interface StateConfig {
+  // Audio
   soundVolume: number; // Value from 0 to 1
   soundEnabled: boolean;
+
+  // Background
+  lastImageFilename: string;
 }
 
 // Static settings that can be changed by user
@@ -19,8 +23,12 @@ const defaultSettings: SettingsConfig = {
 };
 
 const defaultState: StateConfig = {
+  // Audio
   soundVolume: 0.5,
   soundEnabled: true,
+
+  // Background
+  lastImageFilename: "",
 };
 
 const settingsName = "tlf-settings";

@@ -9,11 +9,10 @@ export function CreateIndexPage(): Page {
     element: $(".pageIndex"),
     needBlur: true,
     onEnable: () => {
-      console.log("Index page on enable");
-      
+      //console.log("Index page on enable");
     },
     onDisable: () => {
-      console.log("Index page on disable");
+      //console.log("Index page on disable");
     },
   };
 }

@@ -1,6 +1,5 @@
-:root {
-  --opacity-transition: 0.25s;
-}
+@import url(vars.css);
+
 .page {
   flex: 1;
   transition: var(--opacity-transition) opacity;
@@ -34,7 +33,7 @@
 .settingsBlock {
   flex: 1;
   width: 70em;
-  margin-block: 5em;
+  margin-bottom: 7em;
 
   display: flex;
   flex-direction: column;

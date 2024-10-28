@@ -67,7 +67,6 @@ $("#soundButton").on("click", (e) => {
   UpdateSoundIcon();
 });
 
-
 // Initialization
 $("#soundRange").val(config.state.soundVolume);
 UpdateSoundIcon();

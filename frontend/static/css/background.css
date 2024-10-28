@@ -1,3 +1,4 @@
+@import url(vars.css);
 
 .background {
   z-index: -10;
@@ -20,7 +21,7 @@
   filter: blur(var(--blur-r));
   -webkit-filter: blur(var(--blur-r));
 
-  transition: opacity linear 0.6s, filter 0.5s;
+  transition: opacity linear var(--opacity-transition), filter var(--opacity-transition);
 }
 
 .quick_transparent {

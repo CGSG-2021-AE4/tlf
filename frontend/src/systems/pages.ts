@@ -25,9 +25,7 @@ class PageSystem implements PageSystemI {
     };
 
     // Setup pages
-    console.log(Object.keys(this.pages));
     Object.keys(this.pages).map((key) => {
-      console.log(key);
       this.pages[key].element.addClass("hidden").addClass("transparent");
     });
 
@@ -80,7 +78,7 @@ class PageSystem implements PageSystemI {
     this.CurPage.onDisable();
     this.CurPage.element.addClass("transparent");
     this.CurPage.element.on("transitionend", (e) => {
-      if (this.CurPage == null)
+      if (this.CurPage == null || !$(e.target).hasClass("page"))
         return;
       this.CurPage.element.off("transitionend");
       $(e.target).addClass("hidden");

@@ -3,8 +3,12 @@
   --main-color: #FFCDCD;
   --second-color: #b89c9c83;
   --accent-color: #f06c6c;
+
   --accent-font: "Fugaz One", sans-serif;
+  
   --icon-size: 1.1em;
+
+  --opacity-transition: 0.25s;
 }
 
 /* Example - use it later */

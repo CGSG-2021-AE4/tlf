@@ -1,4 +1,5 @@
 import $ from "jquery";
+import { config } from "./config";
 
 // Background system
 const curZIndex = -10;
@@ -23,10 +24,13 @@ class BackgroundSystem implements BackgroundSystemI {
   }
 
   swapBackground() {
-    // Start opacity transition
+    // Start opacity transition 
     this.isSwapping = true;
+    console.log("start transition");
+
     this.nextBackElement.removeClass("quick_transparent");
     this.nextBackElement.on("transitionend", (e) => {
+      console.log("transitionend");
       this.nextBackElement.off("transitionend");
       this.curBackElement.addClass("quick_transparent");
       var el = this.curBackElement;
@@ -36,7 +40,8 @@ class BackgroundSystem implements BackgroundSystemI {
       this.curBackElement.css("z-index", curZIndex);
       this.nextBackElement.css("z-index", nextZIndex);
       this.isSwapping = false;
-    })
+    });
+
   }
 
   private onImageLoad(filename: string) {
@@ -50,6 +55,7 @@ class BackgroundSystem implements BackgroundSystemI {
       return; // TODO
     }
 
+    config.state.lastImageFilename = filename;
     //This html element only loads the image
     //So when I set it as background it will use this(already loaded)
     var img = new Image(filename);
@@ -64,6 +70,11 @@ class BackgroundSystem implements BackgroundSystemI {
         console.log(`Failed to load image: ${e}`);
       });
     }
+  }
+
+  subtitleImage(filename) { // Function that instantly change the style of current image(for those case when I don't need smooth transition(page load))
+    config.state.lastImageFilename = filename;
+    this.curBackElement.css("background-image", `url(${filename})`);
   }
 
   setBlur(b: boolean) {
