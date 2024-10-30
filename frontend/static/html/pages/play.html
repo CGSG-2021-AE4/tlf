@@ -11,7 +11,7 @@
     bottom: 0.3em;
     right: 0.3em;
   ">
-    <load src="static/html/components/volume_slider.html"></load>
+    <load src="static/html/components/volume_controls.html"></load>
   </div>
   <div style="
     position: absolute;
@@ -19,6 +19,22 @@
     left: 1.2em;
   ">
     <p style="margin: 0;">Author Name - Title</p>
+  </div>
+
+  <div style="
+    position: absolute;
+    bottom: 1.2em;
+    left: 0;
+    right: 0;
+    z-index: -5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+  ">
+    <div style="z-index: 0;">
+      <load src="static/html/components/track_controls.html"></load>
+    </div>
   </div>
 
   <button id="playAudioButton">Play</button> <br/>
