@@ -1,4 +1,4 @@
-import "./settings_button";
-import "./play_button";
-import "./sound_volume";
+import "./side_bar";
 import "./settings";
+import "./track_controls";
+import "./volume_controls";

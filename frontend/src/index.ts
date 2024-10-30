@@ -2,6 +2,7 @@ import "./systems/pages";
 import "./event_handlers/event_handlers"; // !!! This file must be imported ones in program !!!
 import { background } from "./systems/background";
 import { config } from "./systems/config";
+import { audio } from "./systems/audio";
 
 // This file collects all modules
 
@@ -17,3 +18,5 @@ if (config.state.lastImageFilename != undefined && config.state.lastImageFilenam
   background.subtitleImage(config.state.lastImageFilename);
 else
   background.subtitleImage("static/imgs/back0.png");
+
+audio.loadTrack("static/audio/Indigo Jam Unit Sepia.mp3");

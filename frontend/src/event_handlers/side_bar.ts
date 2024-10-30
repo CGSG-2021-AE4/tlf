@@ -1,18 +1,9 @@
 import $ from "jquery";
 import { pages } from "../systems/pages";
-import { audio } from "../systems/audio";
 import { background } from "../systems/background";
 
-$(".playStartButton").on("click", function() {
-  pages.switchPage("play");
-});
-
-$("#playAudioButton").on("click", function() {
-  
-  if (audio.trackPlaying())
-    audio.pauseTrack();
-  else
-    audio.playTrack();
+$(".settingsButton").on("click", function () {
+  pages.switchPage("settings");
 });
 
 $("#setBackground").on("click", function() {
@@ -29,5 +20,3 @@ $("#setBackground").on("click", function() {
   ]
   background.setImage(images[Math.floor(Math.random() * (images.length - 1))]);
 });
-
-audio.loadTrack("static/audio/Indigo Jam Unit Sepia.mp3");
