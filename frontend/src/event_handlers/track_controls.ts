@@ -26,3 +26,8 @@ if (audio.trackPlaying()) {
   $("#audioPauseButton").addClass("hidden");
   $("#audioPlayButton").removeClass("hidden");
 }
+
+$("#trackTimeline").on("input", (e) => {
+  var v = Number($("#trackTimeline").val()); // Value from 0 to 1
+  $("#trackTimeline").css("background", `linear-gradient(to right, var(--main-color) ${v * 100}%, color-mix(in srgb, var(--main-color), transparent 60%) ${v * 100}%)`);
+});
