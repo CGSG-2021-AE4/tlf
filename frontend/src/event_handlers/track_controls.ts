@@ -1,25 +1,29 @@
 import $ from "jquery";
 import { pages } from "../systems/pages";
-import { audio } from "../systems/audio";
+import { player } from "../systems/player";
+
+// Start button
 
 $(".playStartButton").on("click", function() {
   pages.switchPage("play");
 });
 
+// Play/Pause buttons
+
 $("#audioPlayButton").on("click", function() {
-  audio.playTrack();
+  player.play();
   $("#audioPlayButton").addClass("hidden");
   $("#audioPauseButton").removeClass("hidden");
 });
 
 $("#audioPauseButton").on("click", function() {
-  audio.pauseTrack();
+  player.pause();
   $("#audioPauseButton").addClass("hidden");
   $("#audioPlayButton").removeClass("hidden");
 });
 
 // Leave only one button visible
-if (audio.trackPlaying()) {
+if (player.playing()) {
   $("#audioPlayButton").addClass("hidden");
   $("#audioPauseButton").removeClass("hidden");
 } else {
@@ -27,7 +31,17 @@ if (audio.trackPlaying()) {
   $("#audioPlayButton").removeClass("hidden");
 }
 
+// Next/Prev
+$("#audioPrevButton").on("click", function() {
+  player.prev();
+});
+
+$("#audioNextButton").on("click", function() {
+  player.next();
+});
+
+// Timeline
 $("#trackTimeline").on("input", (e) => {
   var v = Number($("#trackTimeline").val()); // Value from 0 to 1
-  $("#trackTimeline").css("background", `linear-gradient(to right, var(--main-color) ${v * 100}%, color-mix(in srgb, var(--main-color), transparent 60%) ${v * 100}%)`);
+  player.setTime(v * player.getDur());
 });

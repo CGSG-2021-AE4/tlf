@@ -21,6 +21,8 @@ func (pr *PagesRouter) Routes() []api.Route {
 	return []api.Route{
 		// Pages
 		{Method: http.MethodGet, Path: "/", Handler: func(c *gin.Context) { c.File(pr.indexFile) }},
-		{Method: http.MethodGet, Path: "/:page", Handler: func(c *gin.Context) { c.File(pr.indexFile) }},
+		{Method: http.MethodGet, Path: "/index", Handler: func(c *gin.Context) { c.File(pr.indexFile) }},
+		{Method: http.MethodGet, Path: "/play", Handler: func(c *gin.Context) { c.File(pr.indexFile) }},
+		{Method: http.MethodGet, Path: "/settings", Handler: func(c *gin.Context) { c.File(pr.indexFile) }},
 	}
 }

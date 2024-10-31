@@ -2,12 +2,15 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os/signal"
 	"syscall"
 
 	"github.com/CGSG-2021-AE4/tlf/api"
 	"github.com/CGSG-2021-AE4/tlf/internal"
+	"github.com/CGSG-2021-AE4/tlf/internal/app"
+	"github.com/CGSG-2021-AE4/tlf/internal/db/json"
 	"github.com/CGSG-2021-AE4/tlf/internal/router"
 	"github.com/gin-gonic/gin"
 )
@@ -47,11 +50,17 @@ func mainRun(ctx context.Context, conf Config) error {
 	// Get router from services
 
 	// Create stores
+	trackStore, err := json.NewTrackStore(conf.TrackStoreFilename)
+	if err != nil {
+		return fmt.Errorf("create track store: %w", err)
+	}
 
 	// Create services
+	trackSvc := app.NewTracksService(trackStore)
 
 	// Create routers
 	rt := api.Routers{Rs: []api.Router{
+		router.NewTracksRouter(trackSvc),
 		router.NewPagesRouter(conf.IndexFile),
 	}}
 
@@ -74,5 +83,6 @@ func mainRun(ctx context.Context, conf Config) error {
 	// Close services
 
 	// Close stores
+
 	return nil
 }
