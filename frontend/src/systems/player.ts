@@ -9,23 +9,26 @@ interface PlayerI {
   prev()
   playing()
   setVolume(v: number)
-  setTime( t: number )
-  getDur(): number
+  seek( t: number )
+  duration(): number
 }
 
 class Player implements PlayerI {
   playlist: TrackDescriptor[];
-  curTrack: TrackDescriptor | undefined;
-  curTrackDur: number; // In milliseconds
-
+  curTrackInfo: TrackDescriptor | undefined;
+  
   public audio: AudioController;
   isPlaying: boolean = false;
-  startTime: number;
-  trackTime: number; // Duration played in milliseconds at the moment it started playing(if playing)
+  startTime: number; // In seconds
+  trackTime: number; // Duration played in seconds at the moment it started playing(if playing)
   isTimelineUpdating: boolean = false;
 
   constructor() {
-    this.audio = new AudioController();
+    this.audio = new AudioController({
+      onend: () => {
+        this.next();
+      }
+    });
     this.playlist = [];
     this.init();
   }
@@ -38,8 +41,8 @@ class Player implements PlayerI {
   async play() {
     if (this.isPlaying)
       return;
-    this.audio.playTrack();
-    this.startTime = Date.now();
+    this.audio.play();
+    this.startTime = Date.now() / 1000.0;
     this.isPlaying = true;
     this.updateTimelineStart();
   }
@@ -48,36 +51,25 @@ class Player implements PlayerI {
     if (!this.isPlaying)
       return;
     this.isPlaying = false;
-    this.trackTime += Date.now() - this.startTime;
-    this.audio.pauseTrack();
+    this.trackTime += Date.now() / 1000.0 - this.startTime;
+    this.audio.pause();
   }
 
   async next() {
-    console.log("next");
-
     // Get new track info
-    this.curTrack = this.playlist.shift();
+    this.curTrackInfo = this.playlist.shift();
     this.trackTime = 0;
 
-    if (this.curTrack == undefined) {
+    if (this.curTrackInfo == undefined) {
       return;
     }
 
     // Loading track
-    await this.audio.loadTrack(this.curTrack.filename);
+    await this.audio.load(this.curTrackInfo.filename);
 
-    const dynamicInfo = this.audio.getTrackDynamicInfo();
-    if (dynamicInfo != undefined) {
-      this.curTrackDur = dynamicInfo.duration * 1000; // Because initially it is in seconds
-    } else {
-      this.curTrackDur = 1; // Cannot divide by 0
-      console.log("fuck dur");
-    }
-
-    this.UpdateTrackInfo();
+    this.updateTrackInfo();
 
     if (this.isPlaying) {
-      console.log("next play");
       this.isPlaying = false;
       this.play();
     }
@@ -86,9 +78,8 @@ class Player implements PlayerI {
   }
 
   async prev() {
-    console.log("prev");
     // Set timeline on 0
-    this.setTime(0);
+    this.seek(0);
   }
 
   playing() {
@@ -100,16 +91,15 @@ class Player implements PlayerI {
   }
 
   // Time from 0 to dur
-  setTime( t: number ) {
-    console.log("set time");
-    this.setTimelineRatio(this.trackTime / this.curTrackDur);
+  seek( t: number ) {
     this.trackTime = t;
-    this.startTime = Date.now();
-    this.audio.setTime(t);
+    this.setTimelineRatio(this.trackTime / this.duration());
+    this.startTime = Date.now() / 1000.0;
+    this.audio.seek(t);
   }
 
-  getDur(): number {
-    return this.curTrackDur;
+  duration(): number {
+    return this.audio.duration(); // In seconds
   }
 
   private async updatePlaylist() { // Adds new tracks
@@ -141,17 +131,16 @@ class Player implements PlayerI {
 
   private updateTimeline() {
     if (this.isPlaying) {
-      console.log("update timeline");
-      this.setTimelineRatio((this.trackTime + Date.now() - this.startTime) / this.curTrackDur);
+      this.setTimelineRatio((this.trackTime + Date.now() / 1000.0 - this.startTime) / this.audio.duration()); // Because duration is in sec, track time is in ms
     } else {
-      this.setTimelineRatio(this.trackTime / this.curTrackDur);
+      this.setTimelineRatio(this.trackTime / this.audio.duration());
     }
   }
 
-  private UpdateTrackInfo() {
-    if (this.curTrack == undefined)
+  private updateTrackInfo() {
+    if (this.curTrackInfo == undefined)
       return;
-    $("#trackName").text(this.curTrack.name + " -- " + this.curTrack.author);
+    $("#trackName").text(this.curTrackInfo.name + " -- " + this.curTrackInfo.author);
   }
 
   // Only updates html elelemt

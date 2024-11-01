@@ -1,4 +1,5 @@
 import $ from "jquery";
+import { Howl, Howler } from "howler";
 
 // Audio system
 
@@ -14,76 +15,101 @@ export interface TrackDynamicInfo {
 
 interface AudioControllerI {
   // Track control
-  loadTrack(filename: string);
-  playTrack();
-  pauseTrack();
-  resetTrack();
+  load(filename: string);
+  play();
+  pause();
+  reset();
 
   // State info getters
-  getTrackDynamicInfo(): TrackDynamicInfo | undefined;
-  trackPlaying(): boolean;
+  duration(): number;
+  playing(): boolean;
 
   setVolume(v: number);
 }
 
+export class CallBacks {
+  onend: () => void;
+}
+
 export class AudioController implements AudioControllerI {
-  curTrack: HTMLAudioElement;
+  sound: Howl | undefined;
 
   volume: number = 1;
+  callbacks: CallBacks
 
-  constructor() {
-    this.curTrack = new Audio();
+  constructor( callbacks: CallBacks ) {
+    this.callbacks = callbacks;
   }
   
-  async loadTrack(filename: string): Promise<void> {
-    console.log("loaaaaaad");
+  async load(filename: string): Promise<void> {
     var d = $.Deferred();
 
-    this.curTrack.setAttribute('src', filename);
-    this.curTrack.load();
-    this.curTrack.addEventListener("canplaythrough", () => {
-      console.log("loaaaded");
-      if (this.curTrack)
-        this.curTrack.volume = this.volume;
-      d.resolve();
+    this.sound = new Howl({
+      src: filename,
+      html5: true,
+      onload: () => {
+        if (this.sound)
+          this.sound.volume(this.volume);
+        d.resolve();
+      },
+      onend: this.callbacks.onend,
+      onloaderror: (e) => {
+        console.log(`Failed to load audio: ${e}`);
+        d.resolve();
+      }
     });
-    this.curTrack.addEventListener("error", (e) => {
-      console.log(`Failed to load audio: ${e}`);
-      d.resolve();
-    });
+    
+    // this.sound.addEventListener("canplaythrough", () => {
+    //   console.log("loaaaded");
+    //   if (this.sound)
+    //     this.sound.volume = this.volume;
+    //   d.resolve();
+    //   this.sound.removeEventListener("canplaythrough", ()=>{});
+    // });
+    // this.sound.addEventListener("error", (e) => {
+    //   console.log(`Failed to load audio: ${e}`);
+    //   d.resolve();
+    // });
     return d.promise();
   }
   
-  resetTrack() {
-    this.curTrack.pause();
+  reset() {
+    if (this.sound)
+      this.sound.unload();
   }
   
-  playTrack() {
-    this.curTrack.play();
+  play() {
+    if (this.sound)
+      this.sound.play();
   }
 
-  pauseTrack() {
-    this.curTrack.pause();
+  pause() {
+    if (this.sound)
+      this.sound.pause();
   }
 
-  setTime(t: number) {
-    this.curTrack.currentTime = t;
+  seek(t: number) {
+    if (this.sound)
+      this.sound.seek(t);
   }
   
   // Dynamic track info or "undefined" if track is not set
-  getTrackDynamicInfo(): TrackDynamicInfo {
-    return {
-      duration: this.curTrack.duration,
-    }
+  duration(): number {
+    if (this.sound)
+      return this.sound.duration();
+    return 1;
   }
-  
+
   // Is track playing now
-  trackPlaying(): boolean {
-    return !this.curTrack.paused;
+  playing(): boolean {
+    if (this.sound)
+      return this.sound.playing();
+    return false;
   }
   
   setVolume(v: number) {
     this.volume = v;
-    this.curTrack.volume = this.volume;
+    if (this.sound)
+      this.sound.volume(v);
   }
 }

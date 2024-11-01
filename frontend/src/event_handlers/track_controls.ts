@@ -43,5 +43,5 @@ $("#audioNextButton").on("click", function() {
 // Timeline
 $("#trackTimeline").on("input", (e) => {
   var v = Number($("#trackTimeline").val()); // Value from 0 to 1
-  player.setTime(v * player.getDur());
+  player.seek(v * player.duration());
 });
