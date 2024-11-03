@@ -28,6 +28,13 @@ sampleRate = args.samplerate
 outSampleSize = args.samplesize
 outMaxFreq = args.maxfreq
 
+if not infilename:
+  print("ERROR: no input file specified")
+  exit()
+if not outfilename:
+  print("ERROR: no output file specified")
+  exit()
+
 print(f'Version: {vmajor}.{vminor}.{vpatch}')
 print("Input file:", infilename)
 print("Output file", outfilename)
@@ -35,13 +42,9 @@ print("Sample rate", sampleRate)
 print("Sample size", outSampleSize)
 print("Max frequency", outMaxFreq)
 
-if len(sys.argv) < 2:
-  exit()
-
 # read file
 rate, data = wav.read(infilename)
 data = [int(i[0]) for i in data] # Remove multiple channels
-
 
 # calculate xf
 sampleSize = rate // sampleRate # sampelrate frames per second

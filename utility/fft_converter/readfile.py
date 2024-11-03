@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import argparse
 
-
 def unpack_version(data):
   return (data >> 16) & 0xFF, (data >> 8) & 0xFF, data & 0xFF
 
@@ -16,11 +15,20 @@ parser.add_argument("-i", "--inputfile", help="Input filename")
 args = parser.parse_args()
 infilename = args.inputfile
 
+if not infilename:
+  print("ERROR: no input file specified")
+  exit()
+
 data = np.fromfile(infilename, 'uint32')
 print(len(data))
 (vdata, sampleRate, sampleSize, samplesCount, maxFreq) = data[:5]
 
-print(unpack_version(vdata), sampleRate, sampleSize, samplesCount, maxFreq)
+(vmajor, vminor, vpatch) = unpack_version(vdata)
+print(vmajor, vminor, vpatch, sampleRate, sampleSize, samplesCount, maxFreq)
+if vmajor != 1 or vminor != 0:
+  print("ERROR unsupported version")
+  exit()
+  
 xf = np.linspace(0, maxFreq, sampleSize)
 
 # print("|", sampleSize, "|", rate, "|", len(xf), "|", xf[0], "|", xf[-1], "|")

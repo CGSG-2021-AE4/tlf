@@ -7,6 +7,7 @@ export interface TrackDescriptor {
   author: string;
   name: string;
   filename: string;
+  fftfilename: string;
 }
 
 export interface TrackDynamicInfo {
@@ -43,6 +44,9 @@ export class AudioController implements AudioControllerI {
   
   async load(filename: string): Promise<void> {
     var d = $.Deferred();
+    
+    if (this.sound)
+      this.sound.unload();
 
     this.sound = new Howl({
       src: filename,

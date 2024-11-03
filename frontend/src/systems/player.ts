@@ -1,4 +1,5 @@
 import { AudioController, TrackDescriptor } from "../utils/audio"
+import { SoundFreqs } from "../utils/sound_freq";
 import { getRand } from "../utils/track_fetcher"
 import $ from "jquery";
 
@@ -18,6 +19,7 @@ class Player implements PlayerI {
   curTrackInfo: TrackDescriptor | undefined;
   
   public audio: AudioController;
+  public freqs: SoundFreqs;
   isPlaying: boolean = false;
   startTime: number; // In seconds
   trackTime: number; // Duration played in seconds at the moment it started playing(if playing)
@@ -29,8 +31,17 @@ class Player implements PlayerI {
         this.next();
       }
     });
+    this.freqs = new SoundFreqs($("soundLines"), 100);
     this.playlist = [];
     this.init();
+
+    return;
+    window.setInterval(() => {
+      for (var i = 0; i < 50; i++) {
+        $(`#soundLine${i}`).css("height", String(Math.random() * 6) + "em");
+      }
+      console.log(Date.now() / 1000.0)
+    }, 0);
   }
 
   private async init() {
@@ -42,6 +53,7 @@ class Player implements PlayerI {
     if (this.isPlaying)
       return;
     this.audio.play();
+    this.freqs.play();
     this.startTime = Date.now() / 1000.0;
     this.isPlaying = true;
     this.updateTimelineStart();
@@ -53,6 +65,7 @@ class Player implements PlayerI {
     this.isPlaying = false;
     this.trackTime += Date.now() / 1000.0 - this.startTime;
     this.audio.pause();
+    this.freqs.pause();
   }
 
   async next() {
@@ -66,6 +79,7 @@ class Player implements PlayerI {
 
     // Loading track
     await this.audio.load(this.curTrackInfo.filename);
+    this.freqs.startWave(this.curTrackInfo.fftfilename);
 
     this.updateTrackInfo();
 

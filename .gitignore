@@ -3,6 +3,7 @@
 **/.vscode/
 **/Makefile
 assets/
+frontend/static/fft
 
 # GO
 go.sum
