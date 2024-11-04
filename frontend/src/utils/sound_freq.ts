@@ -67,7 +67,6 @@ export class SoundFreqs implements TrackPlayerI {
     this.scheduleUpdate();
 
     // Update
-    console.log("update")
     const sampleNumber = Math.floor((Date.now() - this.startTime + this.playedTime) / this.timeout);
     const sampleI = sampleNumber * this.sampleSize;
     for (var i = 0; i < 100; i++) {
