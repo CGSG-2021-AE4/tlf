@@ -68,6 +68,6 @@ $("#soundButton").on("click", (e) => {
 });
 
 // Initialization
-$("#soundRange").val(config.state.soundVolume);
+$("#soundRange").val(config.state.soundVolume * Number(config.state.soundEnabled));
 UpdateSoundIcon();
 player.setVolume(config.state.soundVolume * Number(config.state.soundEnabled));

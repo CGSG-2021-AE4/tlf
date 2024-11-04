@@ -4,6 +4,7 @@
 **/Makefile
 assets/
 frontend/static/fft
+frontend/static/audio
 
 # GO
 go.sum

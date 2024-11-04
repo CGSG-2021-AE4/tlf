@@ -1,6 +1,17 @@
 import $ from "jquery";
 import Cookies from "js-cookie";
 
+// Static settings that can be changed by user
+interface SettingsConfig {
+  // Play page
+  playPageBlur: boolean;
+  showTitleOnPlayPage: boolean;
+
+  // Colors
+  colorSchemeIndex: number;
+
+}
+
 // More temporary values like sound volume
 interface StateConfig {
   // Audio
@@ -11,18 +22,19 @@ interface StateConfig {
   lastImageFilename: string;
 }
 
-// Static settings that can be changed by user
-interface SettingsConfig {
-  playPageBlur: boolean;
-}
 
 // Separate values so settings can be dynamicly reset
 
-const defaultSettings: SettingsConfig = {
+export const defaultSettings: SettingsConfig = {
+  // Play page
   playPageBlur: false,
+  showTitleOnPlayPage: true,
+
+  // Colors
+  colorSchemeIndex: 0,
 };
 
-const defaultState: StateConfig = {
+export const defaultState: StateConfig = {
   // Audio
   soundVolume: 0.5,
   soundEnabled: true,
@@ -33,7 +45,6 @@ const defaultState: StateConfig = {
 
 const settingsName = "tlf-settings";
 const stateName = "tlf-state";
-
 
 class ConfigSystem {
   public settings: SettingsConfig = defaultSettings;
