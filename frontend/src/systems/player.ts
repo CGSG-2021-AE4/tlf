@@ -77,9 +77,12 @@ class Player implements PlayerI {
       return;
     }
 
+    this.audio.reset();
+    this.freqs.reset();
+
     // Loading track
     await this.audio.load(this.curTrackInfo.filename);
-    this.freqs.startWave(this.curTrackInfo.fftfilename);
+    await this.freqs.load(this.curTrackInfo.fftfilename);
 
     this.updateTrackInfo();
 
@@ -110,6 +113,7 @@ class Player implements PlayerI {
     this.setTimelineRatio(this.trackTime / this.duration());
     this.startTime = Date.now() / 1000.0;
     this.audio.seek(t);
+    this.freqs.seek(t);
   }
 
   duration(): number {

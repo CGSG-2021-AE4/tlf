@@ -3,6 +3,14 @@ import { Howl, Howler } from "howler";
 
 // Audio system
 
+export interface TrackPlayerI {
+  load(filename: string);
+  play();
+  pause();
+  seek(t: number); // In seconds
+  reset();
+}
+
 export interface TrackDescriptor {
   author: string;
   name: string;
@@ -14,13 +22,8 @@ export interface TrackDynamicInfo {
   duration: number;
 }
 
-interface AudioControllerI {
-  // Track control
-  load(filename: string);
-  play();
-  pause();
-  reset();
-
+interface AudioControllerI extends TrackPlayerI {
+  
   // State info getters
   duration(): number;
   playing(): boolean;
@@ -78,8 +81,10 @@ export class AudioController implements AudioControllerI {
   }
   
   reset() {
-    if (this.sound)
+    if (this.sound) {
       this.sound.unload();
+      this.sound = undefined;
+    }
   }
   
   play() {
