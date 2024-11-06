@@ -1,4 +1,6 @@
 /********** Fonts **********/
+@import url(fonts.css);
+
 :root {
   font-family: "JetBrains Mono", monospace;
 }

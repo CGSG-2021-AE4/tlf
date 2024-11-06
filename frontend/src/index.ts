@@ -17,4 +17,4 @@ import { player } from "./systems/player";
 if (config.state.lastImageFilename != undefined && config.state.lastImageFilename != "")
   background.subtitleImage(config.state.lastImageFilename);
 else
-  background.subtitleImage("static/imgs/back0.png");
+  background.subtitleImage("static/imgs/back2.png");

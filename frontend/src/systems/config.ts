@@ -31,7 +31,7 @@ export const defaultSettings: SettingsConfig = {
   showTitleOnPlayPage: true,
 
   // Colors
-  colorSchemeIndex: 0,
+  colorSchemeIndex: 1,
 };
 
 export const defaultState: StateConfig = {
