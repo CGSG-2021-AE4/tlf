@@ -137,7 +137,7 @@ export class SoundFreqs implements TrackPlayerI {
     this.data = a.slice(5);
     this.loaded = true;
 
-    console.log(v, this.sampleRate, this.sampleSize, this.sampleCount, this.maxFreq);
+    //console.log(v, this.sampleRate, this.sampleSize, this.sampleCount, this.maxFreq);
 
     // Reset time sync values
     this.playedTime = 0;

@@ -4,14 +4,16 @@ import { getRand } from "../utils/track_fetcher"
 import $ from "jquery";
 
 interface PlayerI {
-  play()
-  pause()
-  next()
-  prev()
-  playing()
-  setVolume(v: number)
-  seek( t: number )
-  duration(): number
+  play();
+  pause();
+  next();
+  prev();
+  seek( t: number );
+
+  duration(): number; // In seconds
+  playing();
+  curTime(): number; // In second
+  setVolume(v: number);
 }
 
 class Player implements PlayerI {
@@ -21,8 +23,8 @@ class Player implements PlayerI {
   public audio: AudioController;
   public freqs: SoundFreqs;
   isPlaying: boolean = false;
-  startTime: number; // In seconds
-  trackTime: number; // Duration played in seconds at the moment it started playing(if playing)
+  startTime: number = 0; // In seconds
+  playedTime: number = 0; // Duration played in seconds at the moment it started playing(if playing)
   isTimelineUpdating: boolean = false;
 
   constructor() {
@@ -57,21 +59,29 @@ class Player implements PlayerI {
     this.startTime = Date.now() / 1000.0;
     this.isPlaying = true;
     this.updateTimelineStart();
+
+    // Update html
+    $("#audioPlayButton").addClass("hidden");
+    $("#audioPauseButton").removeClass("hidden");  
   }
 
   async pause() {
     if (!this.isPlaying)
       return;
     this.isPlaying = false;
-    this.trackTime += Date.now() / 1000.0 - this.startTime;
+    this.playedTime += Date.now() / 1000.0 - this.startTime;
     this.audio.pause();
     this.freqs.pause();
+
+    // Update html
+    $("#audioPauseButton").addClass("hidden");
+    $("#audioPlayButton").removeClass("hidden");  
   }
 
   async next() {
     // Get new track info
     this.curTrackInfo = this.playlist.shift();
-    this.trackTime = 0;
+    this.playedTime = 0;
 
     if (this.curTrackInfo == undefined) {
       return;
@@ -109,8 +119,9 @@ class Player implements PlayerI {
 
   // Time from 0 to dur
   seek( t: number ) {
-    this.trackTime = t;
-    this.setTimelineRatio(this.trackTime / this.duration());
+    t = Math.max(Math.min(t, this.duration()), 0);
+    this.playedTime = t;
+    this.setTimelineRatio(this.playedTime / this.duration());
     this.startTime = Date.now() / 1000.0;
     this.audio.seek(t);
     this.freqs.seek(t);
@@ -118,6 +129,13 @@ class Player implements PlayerI {
 
   duration(): number {
     return this.audio.duration(); // In seconds
+  }
+
+  curTime(): number {
+    if (this.playing()) {
+      return this.playedTime + Date.now() / 1000 - this.startTime;
+    }
+    return this.playedTime;
   }
 
   private async updatePlaylist() { // Adds new tracks
@@ -149,9 +167,9 @@ class Player implements PlayerI {
 
   private updateTimeline() {
     if (this.isPlaying) {
-      this.setTimelineRatio((this.trackTime + Date.now() / 1000.0 - this.startTime) / this.audio.duration()); // Because duration is in sec, track time is in ms
+      this.setTimelineRatio((this.playedTime + Date.now() / 1000.0 - this.startTime) / this.audio.duration()); // Because duration is in sec, track time is in ms
     } else {
-      this.setTimelineRatio(this.trackTime / this.audio.duration());
+      this.setTimelineRatio(this.playedTime / this.audio.duration());
     }
   }
 

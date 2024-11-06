@@ -1,6 +1,7 @@
 import $ from "jquery";
 import { pages } from "../systems/pages";
 import { player } from "../systems/player";
+import { Page } from "../pages/page";
 
 // Start button
 
@@ -12,14 +13,10 @@ $(".playStartButton").on("click", function() {
 
 $("#audioPlayButton").on("click", function() {
   player.play();
-  $("#audioPlayButton").addClass("hidden");
-  $("#audioPauseButton").removeClass("hidden");
 });
 
 $("#audioPauseButton").on("click", function() {
   player.pause();
-  $("#audioPauseButton").addClass("hidden");
-  $("#audioPlayButton").removeClass("hidden");
 });
 
 // Leave only one button visible
@@ -45,3 +42,32 @@ $("#trackTimeline").on("input", (e) => {
   var v = Number($("#trackTimeline").val()); // Value from 0 to 1
   player.seek(v * player.duration());
 });
+
+
+$("body").on("keydown", (e) => {
+  if (pages.CurPage?.name == "play") {
+    switch (e.key) {
+    case " ":
+      if (player.playing()) {
+        player.pause();
+      } else {
+        player.play();
+      }
+      break;
+    case "ArrowRight":
+      if (e.ctrlKey) {
+        player.next();
+      } else {
+        player.seek(player.curTime() + 5);
+      }
+      break;
+    case "ArrowLeft":
+      if (e.ctrlKey) {
+        player.prev()
+      } else {
+        player.seek(player.curTime() - 5);
+      }
+      break;
+    }
+  }
+})
