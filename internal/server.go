@@ -30,13 +30,13 @@ func (s *Server) Start(ctx context.Context) error {
 	ctx, s.stopCtx = context.WithCancel(ctx)
 
 	// Check certificate and private key
-	if err := cg.CheckCert(s.CertFilename); err != nil {
-		log.Println("Certificate is invalid")
-		log.Println("Regenerate certificate...")
-		if err := sscg.Gen(s.CertFilename, s.PrivKeyFilename); err != nil {
-			return err
-		}
-	}
+	//if err := cg.CheckCert(s.CertFilename); err != nil {
+	//	log.Println("Certificate is invalid")
+	//	log.Println("Regenerate certificate...")
+	//	if err := sscg.Gen(s.CertFilename, s.PrivKeyFilename); err != nil {
+	//		return err
+	//	}
+	//}
 
 	rt := gin.New()
 
