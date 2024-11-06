@@ -18,3 +18,8 @@ div.soundWaveLine {
   border-radius: 0.2em;
   transition: height 0.1s;
 }
+
+/********** Controls on play page **********/
+.playControls {
+  transition: opacity 0.3s;
+}

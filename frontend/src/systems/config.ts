@@ -6,6 +6,7 @@ interface SettingsConfig {
   // Play page
   playPageBlur: boolean;
   showTitleOnPlayPage: boolean;
+  hidePlayControls: boolean;
 
   // Colors
   colorSchemeIndex: number;
@@ -29,6 +30,7 @@ export const defaultSettings: SettingsConfig = {
   // Play page
   playPageBlur: false,
   showTitleOnPlayPage: true,
+  hidePlayControls: true,
 
   // Colors
   colorSchemeIndex: 1,

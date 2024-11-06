@@ -67,3 +67,12 @@ BindRadioButton(
   setShowTitle,
 );
 setShowTitle(Number(config.settings.showTitleOnPlayPage));
+
+// Hide play controls
+BindRadioButton(
+  [$("#hidePlayControlsEnable"), $("#hidePlayControlsDisable")],
+  1 - Number(config.settings.hidePlayControls),
+  (i) => {
+    config.settings.hidePlayControls = i == 0;
+  },
+);
