@@ -11,6 +11,18 @@ $("#settingsPageBackButton").on("click", () => {
   history.back();
 });
 
+// Keyboard shortcuts
+$("body").on("keydown", (e) => {
+  if (pages.CurPage?.name == "settings") {
+    console.log(e.key);
+    switch (e.key) {
+      case "Escape":
+        history.back();
+      break;
+    }
+  }
+});
+
 // Test
 BindPushButton($("#testButton"), true, (p)=> { console.log(p);});
 BindRadioButton([$("#radioButton1"), $("#radioButton2"), $("#radioButton3"), $("#radioButton4")], 1, (i)=>{ console.log(i); })
