@@ -9,6 +9,7 @@
   display: flex;
   justify-content: space-between;
   margin-block: 1em;
+  align-items: center;
 }
 
 /********** Index page **********/
@@ -39,6 +40,23 @@
 }
 
 .settingsBlock {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  justify-self: stretch;
+}
+
+/********** Shortcuts page **********/
+
+.pageShortcuts {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-rows: 10em auto 10em;
+
+  overflow-y: scroll;
+}
+
+.shortcutsBlock {
   grid-column: 2;
   grid-row: 2;
   align-self: start;

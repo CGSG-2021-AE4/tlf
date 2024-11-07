@@ -43,7 +43,6 @@ $("#trackTimeline").on("input", (e) => {
   player.seek(v * player.duration());
 });
 
-
 $("body").on("keydown", (e) => {
   if (pages.CurPage?.name == "play") {
     switch (e.key) {
@@ -70,4 +69,4 @@ $("body").on("keydown", (e) => {
       break;
     }
   }
-})
+});

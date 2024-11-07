@@ -7,7 +7,7 @@ import { config, defaultSettings } from "../systems/config";
 import { pages } from "../systems/pages";
 
 // Page back
-$("#settingsPageBackButton").on("click", () => {
+$(".pageBackButton").on("click", () => {
   history.back();
 });
 

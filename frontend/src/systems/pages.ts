@@ -5,6 +5,7 @@ import { background } from "./background";
 import { CreateIndexPage } from "../pages";
 import { CreatePlayPage } from "../pages/play";
 import { CreateSettingsPage } from "../pages/settings";
+import { CreateShortcutsPage } from "../pages/shortcuts";
 
 interface PageSystemI {
   switchPage(page: PageName): void
@@ -22,6 +23,7 @@ class PageSystem implements PageSystemI {
       index: CreateIndexPage(),
       play: CreatePlayPage(),
       settings: CreateSettingsPage(),
+      shortcuts: CreateShortcutsPage(),
     };
 
     // Setup pages
@@ -47,6 +49,9 @@ class PageSystem implements PageSystemI {
     switch (window.location.pathname) {
     case "/settings":
       this.switchPage("settings");
+      break;
+    case "/shortcuts":
+      this.switchPage("shortcuts");
       break;
     case "/play":
       this.switchPage("play");

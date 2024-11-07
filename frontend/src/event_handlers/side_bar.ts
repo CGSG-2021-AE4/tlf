@@ -2,8 +2,12 @@ import $ from "jquery";
 import { pages } from "../systems/pages";
 import { background } from "../systems/background";
 
-$(".settingsButton").on("click", function () {
+$(".goToSettingsButton").on("click", function () {
   pages.switchPage("settings");
+});
+
+$(".goToShortcutsButton").on("click", function () {
+  pages.switchPage("shortcuts");
 });
 
 $("#setBackground").on("click", function() {

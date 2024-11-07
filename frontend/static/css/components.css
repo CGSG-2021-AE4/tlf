@@ -23,3 +23,11 @@ div.soundWaveLine {
 .playControls {
   transition: opacity 0.3s;
 }
+
+/********** shortcut key label **********/
+p.shortcutKey {
+  background-color:  #00000026;
+  padding: 0.6em;
+  border: 0.16em solid color-mix(in srgb, var(--accent-color), transparent 40%);
+  border-radius: 0.8em;
+}

@@ -1,6 +1,6 @@
 // Possible pages
 
-export type PageName = "index" | "play" | "settings";// | "unknown";
+export type PageName = "index" | "play" | "settings" | "shortcuts";// | "unknown";
 
 export class Page {
   name: PageName;
