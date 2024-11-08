@@ -74,6 +74,7 @@ button {
   color: var(--main-color);
   padding-block: 0.3em;
   padding-inline: 0.8em;
+  margin: 0.2em;
   
   user-select: none;
   -webkit-user-select: none;
@@ -90,6 +91,8 @@ button:hover, button.active:hover {
   background-color: var(--main-color);
   color: var(--background-color);
 }
+
+/* Icon buttons */
 
 button.iconButton {
   background-color: transparent;
@@ -108,6 +111,23 @@ button.stdIconSized {
 button.iconButton:hover {
   background-color: transparent;
   transform: scale(1.1);
+}
+
+/* Color theme buttons */
+button.colorTheme {
+  width: 16em;
+}
+
+button.colorTheme.active, button.colorTheme:active {
+  background-color: initial;
+  color: initial;
+  outline: 0.2em solid var(--main-color);
+}
+
+button.colorTheme:hover, button.colorTheme.active:hover {
+  transform: scale(1.1);
+  background-color: initial;
+  color: initial;
 }
 
 /********** Range **********/

@@ -41,7 +41,8 @@ func (s *Server) Start(ctx context.Context) error {
 	// Load static files
 	rt.Static("/static", "./frontend/static")
 	rt.Static("/dist", "./frontend/dist")
-	rt.Static("/assets", "./public_assets")
+	//rt.Static("/assets", "./public_assets")
+	rt.Static("/assets", "./assets")
 	rt.StaticFile("/favicon.ico", "./resources/favicon.ico")
 
 	// Apply midle

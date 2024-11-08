@@ -49,6 +49,18 @@ function setColorScheme(i: number) {
       mainColor = "#e3d7ff"
       accentColor = "#826fbd"
       break;
+    case 2:
+      mainColor = "#a0a0a0"
+      accentColor = "#dfd43e"
+      break;
+    case 3:
+      mainColor = "#a4ddb0"
+      accentColor = "#33d656"
+      break;
+    case 4:
+      mainColor = "#e4d595"
+      accentColor = "#dd4126"
+      break;
   }
 
   $(":root").css("--main-color", mainColor);
@@ -56,7 +68,13 @@ function setColorScheme(i: number) {
 }
 
 BindRadioButton(
-  [$("#colorSchemePink"), $("#colorSchemeBlue")],
+  [
+    $("#colorSchemePink"),
+    $("#colorSchemeBlue"),
+    $("#colorSchemeYellow"),
+    $("#colorSchemeSalat"),
+    $("#colorSchemeWarning"),
+  ],
   config.settings.colorSchemeIndex,
   setColorScheme,
 );

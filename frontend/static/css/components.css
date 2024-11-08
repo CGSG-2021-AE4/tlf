@@ -32,3 +32,33 @@ p.shortcutKey {
   border-radius: 0.7em;
   font-size: 1em;
 }
+
+
+/********** theme button **********/
+
+button.colorTheme {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.2em;
+  text-align: center;
+
+  background-color: var(--background-color);
+  border: none;
+  border-radius: 0.5em;
+  color: var(--main-color);
+  padding-block: 0.3em;
+  padding-inline: 0.8em;
+  
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform 0.06s;
+}
+
+
+button.colorTheme.active, button.colorTheme:active {
+  background-color: initial;
+  color: initial;
+}
+
+button:hover, button.active:hover {
+  transform: scale(1.2);
+}

@@ -29,9 +29,15 @@
     </div>
     <div class="valueLine"> <!-- Color scheme -->
       <label>Color scheme</label>
-      <div>
-        <button id="colorSchemePink">Ping</button>
-        <button id="colorSchemeBlue">Blue</button>
+      <div style="
+        display: flex;
+        flex-direction: column;
+      ">
+      <button id="colorSchemePink" class="colorTheme" style="background-color: #f06c6c; color: #ffcdcd;">Pastel pink</button>
+      <button id="colorSchemeBlue" class="colorTheme" style="background-color: #826fbd; color: #e3d7ff;">Pastel blue</button>
+      <button id="colorSchemeYellow" class="colorTheme" style="background-color: #dfd43e; color: #a0a0a0;">Contrast yellow</button>
+      <button id="colorSchemeSalat" class="colorTheme" style="background-color: #33d656; color: #a4ddb0;">Pastel salat</button>
+      <button id="colorSchemeWarning" class="colorTheme" style="background-color: #dd4126; color: #e4d595;">Warning</button>
       </div>
     </div>
     <div class="valueLine"> <!-- Show title on play page -->
