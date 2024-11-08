@@ -67,6 +67,7 @@ class PageSystem implements PageSystemI {
       return;
     this.CurPage.onEnable();
     background.setBlur(this.CurPage.needBlur)
+    document.title = this.CurPage.title;
     this.CurPage.element.removeClass("hidden");
     window.setTimeout(() => { // So css is able to update and smooth appearing will play
       if (this.CurPage != null)

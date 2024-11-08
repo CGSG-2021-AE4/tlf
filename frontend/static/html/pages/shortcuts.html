@@ -1,42 +1,79 @@
 <div class="page pageShortcuts">
-  <div style="
+  <!-- <div style="
     grid-column: 1;
     grid-row: 2;
     align-self: start;
     justify-self: center;
     margin-top: 3em;
   ">
-    <button class="pageBackButton">Back</button>
+  </div> -->
+  <div style="
+    grid-column: 1 / 3;
+    grid-row: 1;
+    padding-left: 7em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  ">
+    <button class="iconButton pageBackButton" style="
+      padding: 0;
+      margin: 0.5em;
+      width: 3em;
+      height: 3em;
+    ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100%" height="100%" stroke="var(--main-color)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <h1 style="
+      font-size: 4em;
+    ">Shortcuts</h1>
   </div>
+
   <div class="shortcutsBlock">
-    <h1>Shortcuts</h1>
-    <div class="valueLine">
+    <h2>Play page</h2>
+    <div style="
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      justify-items: center;
+    ">
       <p>Pause/Play</p>
       <p class="shortcutKey">Space</p>
-    </div>
-    <div class="valueLine">
       <p>Forward 5 sec</p>
       <p class="shortcutKey">ArrowRight</p>
-    </div>
-    <div class="valueLine">
       <p>Back 5 sec</p>
       <p class="shortcutKey">ArrowLeft</p>
-    </div>
-    <div class="valueLine">
+      <p>Volume up</p>
+      <p class="shortcutKey">Ctrl + ArrowRight</p>
+      <p>Prev</p>
+      <p class="shortcutKey">Ctrl + ArrowLeft</p>
       <p>Volume up</p>
       <p class="shortcutKey">ArrowUp</p>
-    </div>
-    <div class="valueLine">
       <p>Volume down</p>
       <p class="shortcutKey">ArrowDown</p>
-    </div>
-    <div class="valueLine">
       <p>Mute</p>
       <p class="shortcutKey">m</p>
-    </div>
-    <div class="valueLine">
       <p>Settings</p>
       <p class="shortcutKey">s</p>
+    </div>
+    <h2>Settings page</h2>
+    <div style="
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      justify-items: center;
+    ">
+      <p>Back</p>
+      <p class="shortcutKey">Esc</p>
+    </div>
+    <h2>Shortcuts page</h2>
+    <div style="
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      justify-items: center;
+    ">
+      <p>Back</p>
+      <p class="shortcutKey">Esc</p>
     </div>
   </div>
 </div>

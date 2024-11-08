@@ -13,7 +13,7 @@ $(".pageBackButton").on("click", () => {
 
 // Keyboard shortcuts
 $("body").on("keydown", (e) => {
-  if (pages.CurPage?.name == "settings") {
+  if (pages.CurPage?.name == "settings" || pages.CurPage?.name == "shortcuts") {
     console.log(e.key);
     switch (e.key) {
       case "Escape":

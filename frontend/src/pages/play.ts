@@ -5,7 +5,7 @@ import { config } from "../systems/config";
 export function CreatePlayPage(): Page {
   return {
     name: "play",
-    title: "LOFI radio",
+    title: "TLF - customizable LoFi player",
     path: "/play",
     element: $(".pagePlay"),
     needBlur: config.settings.playPageBlur,

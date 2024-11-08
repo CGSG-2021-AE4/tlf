@@ -6,7 +6,7 @@ import { BindRadioButton, RadioButtons } from "../components/radio_button";
 export function CreateSettingsPage(): Page {
   return {
     name: "settings",
-    title: "Settings",
+    title: "TLF Settings",
     path: "/settings",
     element: $(".pageSettings"),
     needBlur: true,

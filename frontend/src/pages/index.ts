@@ -4,7 +4,7 @@ import { Page } from "./page";
 export function CreateIndexPage(): Page {
   return {
     name: "index",
-    title: "LOFI radio",
+    title: "TLF - customizable LoFi player",
     path: "/",
     element: $(".pageIndex"),
     needBlur: true,
