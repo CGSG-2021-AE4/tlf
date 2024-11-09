@@ -43,7 +43,7 @@ func (s *Server) Start(ctx context.Context) error {
 	rt.Static("/dist", "./frontend/dist")
 	//rt.Static("/assets", "./public_assets")
 	rt.Static("/assets", "./assets")
-	rt.StaticFile("/favicon.ico", "./resources/favicon.ico")
+	rt.StaticFile("/favicon.ico", "./frontend/static/favicon.svg")
 
 	// Apply midle
 	for _, f := range s.Midleware {

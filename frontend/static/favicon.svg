@@ -1,0 +1,27 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_68_2)">
+<rect width="64" height="64" rx="14" fill="url(#paint0_linear_68_2)"/>
+<mask id="mask0_68_2" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+<rect width="64" height="64" rx="14" fill="white"/>
+</mask>
+<g mask="url(#mask0_68_2)">
+<path d="M20 8V56" stroke="#DFE1EC" stroke-width="8" stroke-linecap="round"/>
+<path d="M8 20V56" stroke="#DFE1EC" stroke-width="8" stroke-linecap="round"/>
+<path d="M56 32V56" stroke="#DFE1EC" stroke-width="8" stroke-linecap="round"/>
+<path d="M32 20V56" stroke="#DFE1EC" stroke-width="8" stroke-linecap="round"/>
+<path d="M44 8V44" stroke="#DFE1EC" stroke-width="8" stroke-linecap="round"/>
+<path d="M8 8L32 8" stroke="#DFE1EC" stroke-width="8" stroke-linecap="round"/>
+<path d="M32 56H44" stroke="#DFE1EC" stroke-width="8" stroke-linecap="round"/>
+<path d="M44 8H56" stroke="#DFE1EC" stroke-width="8" stroke-linecap="round"/>
+<path d="M44 20H56" stroke="#DFE1EC" stroke-width="8" stroke-linecap="round"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_68_2" x1="32" y1="0" x2="32" y2="64" gradientUnits="userSpaceOnUse">
+<stop offset="0.945" stop-color="#034066"/>
+</linearGradient>
+<clipPath id="clip0_68_2">
+<rect width="64" height="64" fill="white"/>
+</clipPath>
+</defs>
+</svg>
