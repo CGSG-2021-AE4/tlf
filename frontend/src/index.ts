@@ -2,7 +2,6 @@ import "./systems/pages";
 import "./event_handlers/event_handlers"; // !!! This file must be imported ones in program !!!
 import { background } from "./systems/background";
 import { config } from "./systems/config";
-import { player } from "./systems/player";
 
 // This file collects all modules
 

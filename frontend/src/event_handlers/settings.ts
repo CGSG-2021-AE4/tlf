@@ -1,9 +1,8 @@
 // Settings page event handlers
 
-import $ from "jquery";
 import { BindPushButton } from "../components/push_button";
 import { BindRadioButton } from "../components/radio_button";
-import { config, defaultSettings } from "../systems/config";
+import { config } from "../systems/config";
 import { pages } from "../systems/pages";
 
 // Page back

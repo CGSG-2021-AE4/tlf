@@ -1,6 +1,3 @@
-
-import $ from "jquery";
-
 export type ChangeCallBack = (isPushed: boolean) => void;
 
 export function SetButtonValue(el: JQuery, value: boolean) {

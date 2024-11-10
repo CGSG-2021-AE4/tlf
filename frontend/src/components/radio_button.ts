@@ -1,5 +1,3 @@
-import $ from "jquery";
-
 export type ChangeCallBack = (index: number) => void;
 export type RadioButtons = JQuery[];
 

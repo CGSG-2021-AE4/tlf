@@ -1,4 +1,3 @@
-import $ from "jquery";
 import Cookies from "js-cookie";
 
 // Static settings that can be changed by user

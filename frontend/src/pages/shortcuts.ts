@@ -1,4 +1,3 @@
-import $ from "jquery";
 import { Page } from "./page";
 
 export function CreateShortcutsPage(): Page {

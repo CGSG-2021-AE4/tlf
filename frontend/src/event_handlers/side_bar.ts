@@ -1,4 +1,3 @@
-import $ from "jquery";
 import { pages } from "../systems/pages";
 import { background } from "../systems/background";
 

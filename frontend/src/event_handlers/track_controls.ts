@@ -1,7 +1,5 @@
-import $ from "jquery";
 import { pages } from "../systems/pages";
 import { player } from "../systems/player";
-import { Page } from "../pages/page";
 
 // Start button
 

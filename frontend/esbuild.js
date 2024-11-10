@@ -8,6 +8,7 @@ esbuild
     bundle: true,
     minify: false,
     plugins: [],
+    inject: ['./src/utils/jquery_inject.js'],
   })
   .then(() => console.log("JS Build completed."))
   .catch(()=> process.exit(1));

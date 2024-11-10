@@ -1,4 +1,3 @@
-import $ from "jquery";
 import { Page, PageName } from "../pages/page";
 
 import { background } from "./background";
@@ -8,8 +7,8 @@ import { CreateSettingsPage } from "../pages/settings";
 import { CreateShortcutsPage } from "../pages/shortcuts";
 
 interface PageSystemI {
-  switchPage(page: PageName): void
-  setLoading(isLoading: boolean);
+  switchPage(page: PageName): void;
+  setLoading(isLoading: boolean): void;
 }
 
 class PageSystem implements PageSystemI {

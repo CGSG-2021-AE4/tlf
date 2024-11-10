@@ -1,5 +1,3 @@
-import $ from "jquery";
-
 // Loades HTML through GET request
 
 // Global variable for loading state

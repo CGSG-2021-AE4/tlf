@@ -1,14 +1,13 @@
-import $ from "jquery";
-import { Howl, Howler } from "howler";
+import { Howl } from "howler";
 
 // Audio system
 
 export interface TrackPlayerI {
-  load(filename: string);
-  play();
-  pause();
-  seek(t: number); // In seconds
-  reset();
+  load(filename: string): void;
+  play(): void;
+  pause(): void;
+  seek(t: number): void; // In seconds
+  reset(): void;
 }
 
 export interface TrackDescriptor {
@@ -28,7 +27,7 @@ interface AudioControllerI extends TrackPlayerI {
   duration(): number;
   playing(): boolean;
 
-  setVolume(v: number);
+  setVolume(v: number): void;
 }
 
 export class CallBacks {

@@ -1,4 +1,3 @@
-import $ from "jquery";
 import { TrackPlayerI } from "./audio";
 
 interface version {

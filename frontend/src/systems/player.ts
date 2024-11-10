@@ -1,19 +1,18 @@
 import { AudioController, TrackDescriptor } from "../utils/audio"
 import { SoundFreqs } from "../utils/sound_freq";
 import { getRand } from "../utils/track_fetcher"
-import $ from "jquery";
 
 interface PlayerI {
-  play();
-  pause();
-  next();
-  prev();
-  seek( t: number );
+  play(): void;
+  pause(): void;
+  next(): void;
+  prev(): void;
+  seek( t: number ): void;
 
   duration(): number; // In seconds
-  playing();
+  playing(): boolean;
   curTime(): number; // In second
-  setVolume(v: number);
+  setVolume(v: number): void;
 }
 
 class Player implements PlayerI {

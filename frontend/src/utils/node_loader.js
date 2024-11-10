@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
+// const { JSDOM } = jsdom;
 const { parse } =  require('node-html-parser');
 
 // HTML Loader to use in compile time

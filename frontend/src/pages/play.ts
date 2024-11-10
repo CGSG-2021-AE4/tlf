@@ -1,4 +1,3 @@
-import $ from "jquery";
 import { Page } from "./page";
 import { config } from "../systems/config";
 

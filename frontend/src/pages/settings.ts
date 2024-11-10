@@ -1,7 +1,4 @@
-import $ from "jquery";
 import { Page } from "./page";
-import { BindPushButton } from "../components/push_button";
-import { BindRadioButton, RadioButtons } from "../components/radio_button";
 
 export function CreateSettingsPage(): Page {
   return {

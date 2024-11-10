@@ -1,4 +1,3 @@
-import $ from "jquery";
 import { config } from "./config";
 
 // Background system
@@ -6,7 +5,7 @@ const curZIndex = -10;
 const nextZIndex = -9;
 
 interface BackgroundSystemI {
-  setBlur(b: boolean);
+  setBlur(b: boolean): void;
 }
 
 class BackgroundSystem implements BackgroundSystemI {
@@ -29,7 +28,7 @@ class BackgroundSystem implements BackgroundSystemI {
     console.log("start transition");
 
     this.nextBackElement.removeClass("quick_transparent");
-    this.nextBackElement.on("transitionend", (e) => {
+    this.nextBackElement.on("transitionend", () => {
       console.log("transitionend");
       this.nextBackElement.off("transitionend");
       this.curBackElement.addClass("quick_transparent");
