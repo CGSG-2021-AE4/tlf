@@ -1,11 +1,20 @@
 import Cookies from "js-cookie";
 
+type FreqStartAlignment = "left" | "right";
+type FreqVerAlignment = "bottom" | "center" | "top";
+type FreqLinesCount = 20 | 40 | 60 | 80 | 100;
+
 // Static settings that can be changed by user
 interface SettingsConfig {
   // Play page
   playPageBlur: boolean;
   showTitleOnPlayPage: boolean;
   hidePlayControls: boolean;
+  // Frequency indicator
+  freqStartAlignment: FreqStartAlignment;
+  freqVertAlignment: FreqVerAlignment;
+  freqIsReflect: boolean;
+  freqLinesCount: FreqLinesCount;
 
   // Colors
   colorSchemeIndex: number;
@@ -22,7 +31,6 @@ interface StateConfig {
   lastImageFilename: string;
 }
 
-
 // Separate values so settings can be dynamicly reset
 
 export const defaultSettings: SettingsConfig = {
@@ -30,6 +38,11 @@ export const defaultSettings: SettingsConfig = {
   playPageBlur: false,
   showTitleOnPlayPage: true,
   hidePlayControls: true,
+  // Frequency indicator
+  freqStartAlignment: "left",
+  freqVertAlignment: "center",
+  freqIsReflect: false,
+  freqLinesCount: 80,
 
   // Colors
   colorSchemeIndex: 1,

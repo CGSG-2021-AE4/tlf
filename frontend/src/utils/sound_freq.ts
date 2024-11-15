@@ -17,7 +17,10 @@ function unpackVersion(d: number): version {
 export class SoundFreqs implements TrackPlayerI {
   // Html values
   container: JQuery;
-  soundLines: JQuery[];
+  soundLines: JQuery[] = [];
+  linesCount: number = 0;
+  isReflected: boolean = false;
+  reverted: boolean = false; // false: direction from left to right, true: direction from right to left
 
   // Time sync values
   playing: boolean = false;
@@ -34,14 +37,34 @@ export class SoundFreqs implements TrackPlayerI {
   maxFreq: number;
   data: Uint32Array;
 
-  constructor(container: JQuery, count: number) {
-    container = container;
-    this.soundLines = [];
-    // TEMP solution
-    for (var i = 0; i < 100; i++) {
-      this.soundLines.push($(`#soundLine${i}`))
-    }
+  constructor(container: JQuery) {
+    this.container = container;
+
     this.reset();
+  }
+
+  setLines(count: number, isReflected: boolean, reverted: boolean) {
+    if (this.isReflected == isReflected && this.linesCount == count && this.reverted == reverted) {
+      return;
+    }
+    this.linesCount = count;
+    this.isReflected = isReflected;
+    this.reverted = reverted;
+
+    // Clear
+    this.container.empty();
+    this.soundLines = [];
+
+    count += count * Number(this.isReflected);
+
+    // Generate
+    for (var i = 0; i < count; i++) {
+      this.soundLines.push($("<div>", {id: `soundLine${i}`, "class": "soundWaveLine", "style": "height: 0.4em"}));
+      // this.soundLines.push($(`#soundLine${i}`))
+    }
+    for (var i = 0; i < this.soundLines.length; i++) {
+      this.container.append(this.soundLines[i]);
+    }
   }
 
   scheduleUpdate() {
@@ -51,7 +74,7 @@ export class SoundFreqs implements TrackPlayerI {
   }
 
   zeroLines() { // Set all lines to zero position
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < this.soundLines.length; i++) {
       this.soundLines[i].css("height", "0.4em");
     }
   }
@@ -68,9 +91,34 @@ export class SoundFreqs implements TrackPlayerI {
     // Update
     const sampleNumber = Math.floor((Date.now() - this.startTime + this.playedTime) / this.timeout);
     const sampleI = sampleNumber * this.sampleSize;
-    for (var i = 0; i < 100; i++) {
-      const v = Math.min(this.data[sampleI + i] / 100, 6) + 0.4;
-      this.soundLines[i].css("height", `${v}em`);
+    const count = Math.min(this.linesCount, this.sampleSize);
+    if (this.isReflected) {
+      if (this.reverted) {
+        for (var i = 0; i < count; i++) {
+          const v = Math.min(this.data[sampleI + count - i] / 100, 6) + 0.4;
+          this.soundLines[this.linesCount + i].css("height", `${v}em`);
+          this.soundLines[this.linesCount - 1 - i].css("height", `${v}em`);
+        }
+      } else {
+        for (var i = 0; i < count; i++) {
+          const v = Math.min(this.data[sampleI + i] / 100, 6) + 0.4;
+          this.soundLines[this.linesCount + i].css("height", `${v}em`);
+          this.soundLines[this.linesCount - 1 - i].css("height", `${v}em`);
+        }
+      }
+      
+    } else {
+      if (this.reverted) {
+        for (var i = 0; i < count; i++) {
+          const v = Math.min(this.data[sampleI + count - i] / 100, 6) + 0.4;
+          this.soundLines[i].css("height", `${v}em`);
+        }
+      } else {
+        for (var i = 0; i < count; i++) {
+          const v = Math.min(this.data[sampleI + i] / 100, 6) + 0.4;
+          this.soundLines[i].css("height", `${v}em`);
+        }
+      }
     }
   }
 

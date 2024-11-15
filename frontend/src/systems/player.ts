@@ -32,7 +32,7 @@ class Player implements PlayerI {
         this.next();
       }
     });
-    this.freqs = new SoundFreqs($("soundLines"), 100);
+    this.freqs = new SoundFreqs($("#soundLines"));
     this.playlist = [];
     this.init();
 

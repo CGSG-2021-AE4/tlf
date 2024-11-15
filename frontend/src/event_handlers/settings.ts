@@ -3,6 +3,7 @@
 import { BindPushButton } from "../components/push_button";
 import { BindRadioButton } from "../components/radio_button";
 import { config } from "../systems/config";
+import { player } from "../systems/player";
 import { pages } from "../systems/pages";
 
 // Page back
@@ -105,3 +106,103 @@ BindRadioButton(
     config.settings.hidePlayControls = i == 0;
   },
 );
+
+// Frequency lines
+
+function updateFreqLines() {
+  console.log(config.settings.freqStartAlignment, String(config.settings.freqStartAlignment) == "right");
+  player.freqs.setLines(config.settings.freqLinesCount, config.settings.freqIsReflect, config.settings.freqStartAlignment == "right");
+
+  // Vertrical alignment
+  switch (config.settings.freqVertAlignment) {
+  case "top":
+    $("#soundLines").css("align-items", "flex-start");
+    break;
+  case "center":
+    $("#soundLines").css("align-items", "center");
+    break;
+  case "bottom":
+    $("#soundLines").css("align-items", "flex-end");
+    break;
+  }
+}
+
+// Count
+BindRadioButton(
+  [$("#freqLinesCount20"), $("#freqLinesCount40"), $("#freqLinesCount60"), $("#freqLinesCount80"), $("#freqLinesCount100")],
+  Number(config.settings.freqLinesCount) / 20 - 1,
+  (i) => {
+    switch (i) {
+    case 0:
+      config.settings.freqLinesCount = 20;
+      break;
+    case 1:
+      config.settings.freqLinesCount = 40;
+      break;
+    case 2:
+      config.settings.freqLinesCount = 60;
+      break;
+    case 3:
+      config.settings.freqLinesCount = 80;
+      break;
+    case 4:
+      config.settings.freqLinesCount = 100;
+      break;
+    }  
+
+    updateFreqLines();
+  },
+);
+
+// Orientaion
+BindRadioButton(
+  [$("#freqLinesStartLeft"), $("#freqLinesStartRight")],
+  Number(config.settings.freqStartAlignment == "right"),
+  (i) => {
+    switch (i) {
+    case 0:
+      config.settings.freqStartAlignment = "left";
+      break;
+    case 1:
+      config.settings.freqStartAlignment = "right";
+      break;
+    }
+
+    updateFreqLines();
+  },
+);
+
+// Orientaion
+BindRadioButton(
+  [$("#freqLinesReflectEnable"), $("#freqLinesReflectDisable")],
+  1 - Number(config.settings.freqIsReflect),
+  (i) => {
+    config.settings.freqIsReflect = i == 0;
+
+    updateFreqLines();
+  },
+);
+
+// Vertical alignment
+BindRadioButton(
+  [$("#freqLinesVertAlignBottom"), $("#freqLinesVertAlignCenter"), $("freqLinesVertAlignTop")],
+  config.settings.freqVertAlignment == "bottom" ? 0 :
+  config.settings.freqVertAlignment == "center" ? 1 : 2,
+  (i) => {
+    switch (i) {
+    case 0:
+      config.settings.freqVertAlignment = "bottom";
+      break;
+    case 1:
+      config.settings.freqVertAlignment = "center";
+      break;
+    case 2:
+      config.settings.freqVertAlignment = "top";
+      break;
+    }
+
+    updateFreqLines();
+  },
+);
+
+updateFreqLines();
