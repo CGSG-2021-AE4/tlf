@@ -1,20 +1,25 @@
 import Cookies from "js-cookie";
 
 type FreqStartAlignment = "left" | "right";
-type FreqVerAlignment = "bottom" | "center" | "top";
+type VertAlignment = "bottom" | "center" | "top";
 type FreqLinesCount = 20 | 40 | 60 | 80 | 100;
 
 // Static settings that can be changed by user
 interface SettingsConfig {
   // Play page
   playPageBlur: boolean;
-  showTitleOnPlayPage: boolean;
   hidePlayControls: boolean;
+
   // Frequency indicator
   freqStartAlignment: FreqStartAlignment;
-  freqVertAlignment: FreqVerAlignment;
+  freqVertAlignment: VertAlignment;
   freqIsReflect: boolean;
   freqLinesCount: FreqLinesCount;
+  freqBlockVertAlignment: VertAlignment;
+
+  // Title
+  showTitleOnPlayPage: boolean;
+  titleVertAlignment: VertAlignment;
 
   // Colors
   colorSchemeIndex: number;
@@ -36,13 +41,17 @@ interface StateConfig {
 export const defaultSettings: SettingsConfig = {
   // Play page
   playPageBlur: false,
-  showTitleOnPlayPage: true,
   hidePlayControls: true,
   // Frequency indicator
   freqStartAlignment: "left",
   freqVertAlignment: "center",
   freqIsReflect: false,
   freqLinesCount: 80,
+  freqBlockVertAlignment: "center",
+
+  // Title
+  showTitleOnPlayPage: true,
+  titleVertAlignment: "center",
 
   // Colors
   colorSchemeIndex: 1,

@@ -81,22 +81,34 @@ BindRadioButton(
 setColorScheme(config.settings.colorSchemeIndex);
 
 // Show title
-function setShowTitle(show: number) {
-  config.settings.showTitleOnPlayPage = Boolean(show);
-
+function updateTitle() {
+  // Show/hide
   if (config.settings.showTitleOnPlayPage) {
     $("#playPageTitle").removeClass("hidden");
   } else {
     $("#playPageTitle").addClass("hidden");
+  }
+  // Vertrical alignment
+  switch (config.settings.titleVertAlignment) {
+  case "top":
+    $("#playPageTitle").css("align-self", "flex-start");
+    break;
+  case "center":
+    $("#playPageTitle").css("align-self", "center");
+    break;
+  case "bottom":
+    $("#playPageTitle").css("align-self", "flex-end");
+    break;
   }
 }
 
 BindRadioButton(
   [$("#showTitleOnPlayPageHide"), $("#showTitleOnPlayPageShow")],
   Number(config.settings.showTitleOnPlayPage),
-  setShowTitle,
+  (i) => {
+    config.settings.showTitleOnPlayPage = i == 1;
+  }
 );
-setShowTitle(Number(config.settings.showTitleOnPlayPage));
 
 // Hide play controls
 BindRadioButton(
@@ -123,6 +135,18 @@ function updateFreqLines() {
     break;
   case "bottom":
     $("#soundLines").css("align-items", "flex-end");
+    break;
+  }
+  // Vertrical alignment
+  switch (config.settings.freqBlockVertAlignment) {
+  case "top":
+    $("#soundLines").css("align-self", "flex-start");
+    break;
+  case "center":
+    $("#soundLines").css("align-self", "center");
+    break;
+  case "bottom":
+    $("#soundLines").css("align-self", "flex-end");
     break;
   }
 }
@@ -185,7 +209,7 @@ BindRadioButton(
 
 // Vertical alignment
 BindRadioButton(
-  [$("#freqLinesVertAlignBottom"), $("#freqLinesVertAlignCenter"), $("freqLinesVertAlignTop")],
+  [$("#freqLinesVertAlignBottom"), $("#freqLinesVertAlignCenter"), $("#freqLinesVertAlignTop")],
   config.settings.freqVertAlignment == "bottom" ? 0 :
   config.settings.freqVertAlignment == "center" ? 1 : 2,
   (i) => {
@@ -205,4 +229,49 @@ BindRadioButton(
   },
 );
 
+// Block vertical alignment
+BindRadioButton(
+  [$("#freqLinesBlockVertAlignBottom"), $("#freqLinesBlockVertAlignCenter"), $("#freqLinesBlockVertAlignTop")],
+  config.settings.freqBlockVertAlignment == "bottom" ? 0 :
+  config.settings.freqBlockVertAlignment == "center" ? 1 : 2,
+  (i) => {
+    switch (i) {
+    case 0:
+      config.settings.freqBlockVertAlignment = "bottom";
+      break;
+    case 1:
+      config.settings.freqBlockVertAlignment = "center";
+      break;
+    case 2:
+      config.settings.freqBlockVertAlignment = "top";
+      break;
+    }
+
+    updateFreqLines();
+  },
+);
+
+// Title vertical alignment
+BindRadioButton(
+  [$("#titleVertAlignBottom"), $("#titleVertAlignCenter"), $("#titleVertAlignTop")],
+  config.settings.titleVertAlignment == "bottom" ? 0 :
+  config.settings.titleVertAlignment == "center" ? 1 : 2,
+  (i) => {
+    switch (i) {
+    case 0:
+      config.settings.titleVertAlignment = "bottom";
+      break;
+    case 1:
+      config.settings.titleVertAlignment = "center";
+      break;
+    case 2:
+      config.settings.titleVertAlignment = "top";
+      break;
+    }
+
+    updateTitle();
+  },
+);
+
 updateFreqLines();
+updateTitle();
