@@ -2,6 +2,7 @@
 
 import { BindPushButton } from "../components/push_button";
 import { BindRadioButton } from "../components/radio_button";
+import { HiddenComponent } from "../components/hidden";
 import { config } from "../systems/config";
 import { player } from "../systems/player";
 import { pages } from "../systems/pages";
@@ -22,10 +23,6 @@ $("body").on("keydown", (e) => {
     }
   }
 });
-
-// Test
-BindPushButton($("#testButton"), true, (p)=> { console.log(p);});
-BindRadioButton([$("#radioButton1"), $("#radioButton2"), $("#radioButton3"), $("#radioButton4")], 1, (i)=>{ console.log(i); })
 
 // Player blur
 BindRadioButton(
@@ -80,14 +77,21 @@ BindRadioButton(
 );
 setColorScheme(config.settings.colorSchemeIndex);
 
+// Title
+
+const titleSettingsComponent = new HiddenComponent($("#titleSettings"));
+
 // Show title
 function updateTitle() {
   // Show/hide
   if (config.settings.showTitleOnPlayPage) {
     $("#playPageTitle").removeClass("hidden");
+    titleSettingsComponent.toggle(false);
   } else {
     $("#playPageTitle").addClass("hidden");
+    titleSettingsComponent.toggle(true);
   }
+  
   // Vertrical alignment
   switch (config.settings.titleVertAlignment) {
   case "top":
@@ -107,6 +111,7 @@ BindRadioButton(
   Number(config.settings.showTitleOnPlayPage),
   (i) => {
     config.settings.showTitleOnPlayPage = i == 1;
+    updateTitle();
   }
 );
 
@@ -116,13 +121,33 @@ BindRadioButton(
   1 - Number(config.settings.hidePlayControls),
   (i) => {
     config.settings.hidePlayControls = i == 0;
+    updateTitle();
   },
 );
 
 // Frequency lines
 
+const linesSettingsComponent = new HiddenComponent($("#freqLinesSettings"));
+
+// Enable / disable freq lines
+BindRadioButton(
+  [$("#freqLinesEnable"), $("#freqLinesDisable")],
+  Number(!config.settings.freqLinesEnable),
+  (i) => {
+    config.settings.freqLinesEnable = i == 0;
+    updateFreqLines();
+  },
+);
+
 function updateFreqLines() {
   console.log(config.settings.freqStartAlignment, String(config.settings.freqStartAlignment) == "right");
+  if (config.settings.freqLinesEnable) {
+    $("#soundLines").removeClass("hidden");
+    linesSettingsComponent.toggle(false);
+  } else {
+    $("#soundLines").addClass("hidden");
+    linesSettingsComponent.toggle(true);
+  }
   player.freqs.setLines(config.settings.freqLinesCount, config.settings.freqIsReflect, config.settings.freqStartAlignment == "right");
 
   // Vertrical alignment

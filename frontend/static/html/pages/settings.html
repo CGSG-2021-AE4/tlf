@@ -36,61 +36,72 @@
         <button id="showTitleOnPlayPageHide">Hide</button>
       </div>
     </div>
-    <div class="valueLine"> <!-- Title vertical alignment -->
-      <label>Title vertical alignment</label>
-      <div style="display: flex;">
-        <button id="titleVertAlignBottom">Lower</button>
-        <button id="titleVertAlignCenter">Center</button>
-        <button id="titleVertAlignTop">Higher</button>
+    <div id="titleSettings">
+      <div class="valueLine"> <!-- Title vertical alignment -->
+        <label>Title vertical alignment</label>
+        <div style="display: flex;">
+          <button id="titleVertAlignBottom">Lower</button>
+          <button id="titleVertAlignCenter">Center</button>
+          <button id="titleVertAlignTop">Higher</button>
+        </div>
       </div>
     </div>
     <h2>Frequency lines</h2>
     <div class="valueLine"> <!-- Frequency lines count -->
-      <label>Lines count</label>
+      <label>Show frequency lines</label>
       <div style="display: flex;">
-        <button id="freqLinesCount20">20</button>
-        <button id="freqLinesCount40">40</button>
-        <button id="freqLinesCount60">60</button>
-        <button id="freqLinesCount80">80</button>
-        <button id="freqLinesCount100">100</button>
+        <button id="freqLinesEnable">Enable</button>
+        <button id="freqLinesDisable">Disable</button>
       </div>
     </div>
-    <div class="valueLine"> <!-- Frequency lines start -->
-      <label>Frequency direction</label>
-      <div style="display: flex; flex-direction: column;">
-        <button id="freqLinesStartLeft">From left to right</button>
-        <button id="freqLinesStartRight">From right to left</button>
+    <div id="freqLinesSettings">
+      <div class="valueLine"> <!-- Frequency lines count -->
+        <label>Lines count</label>
+        <div style="display: flex;">
+          <button id="freqLinesCount20">20</button>
+          <button id="freqLinesCount40">40</button>
+          <button id="freqLinesCount60">60</button>
+          <button id="freqLinesCount80">80</button>
+          <button id="freqLinesCount100">100</button>
+        </div>
       </div>
-    </div>
-    <div class="valueLine"> <!-- Frequency lines vertical alignment -->
-      <label>Lines vertical beginning</label>
-      <div style="display: flex; flex-direction: column;">
-        <button id="freqLinesVertAlignBottom">From bottom</button>
-        <button id="freqLinesVertAlignCenter">Centered</button>
-        <button id="freqLinesVertAlignTop">From top</button>
+      <div class="valueLine"> <!-- Frequency lines start -->
+        <label>Frequency direction</label>
+        <div style="display: flex; flex-direction: column;">
+          <button id="freqLinesStartLeft">From left to right</button>
+          <button id="freqLinesStartRight">From right to left</button>
+        </div>
       </div>
-    </div>
-    <div class="valueLine"> <!-- Frequency lines block vertical alignment -->
-      <label>Block vertical alignment</label>
-      <div style="display: flex;">
-        <button id="freqLinesBlockVertAlignBottom">Lower</button>
-        <button id="freqLinesBlockVertAlignCenter">Center</button>
-        <button id="freqLinesBlockVertAlignTop">Higher</button>
+      <div class="valueLine"> <!-- Frequency lines vertical alignment -->
+        <label>Lines vertical beginning</label>
+        <div style="display: flex; flex-direction: column;">
+          <button id="freqLinesVertAlignBottom">From bottom</button>
+          <button id="freqLinesVertAlignCenter">Centered</button>
+          <button id="freqLinesVertAlignTop">From top</button>
+        </div>
       </div>
-    </div>
-    <div class="valueLine"> <!-- Are frequency lines reflected -->
-      <label>Reflection</label>
-      <div style="display: flex;">
-        <button id="freqLinesReflectEnable">Enable</button>
-        <button id="freqLinesReflectDisable">Disable</button>
+      <div class="valueLine"> <!-- Frequency lines block vertical alignment -->
+        <label>Block vertical alignment</label>
+        <div style="display: flex;">
+          <button id="freqLinesBlockVertAlignBottom">Lower</button>
+          <button id="freqLinesBlockVertAlignCenter">Center</button>
+          <button id="freqLinesBlockVertAlignTop">Higher</button>
+        </div>
       </div>
-    </div>
-    <h2>Play controls</h2>
-    <div class="valueLine"> <!-- Hide play controls while not used -->
-      <label>Hide play controls after some time</label>
-      <div style="display: flex;">
-        <button id="hidePlayControlsEnable">Enable</button>
-        <button id="hidePlayControlsDisable">Disable</button>
+      <div class="valueLine"> <!-- Are frequency lines reflected -->
+        <label>Reflection</label>
+        <div style="display: flex;">
+          <button id="freqLinesReflectEnable">Enable</button>
+          <button id="freqLinesReflectDisable">Disable</button>
+        </div>
+      </div>
+      <h2>Play controls</h2>
+      <div class="valueLine"> <!-- Hide play controls while not used -->
+        <label>Hide play controls after some time</label>
+        <div style="display: flex;">
+          <button id="hidePlayControlsEnable">Enable</button>
+          <button id="hidePlayControlsDisable">Disable</button>
+        </div>
       </div>
     </div>
     <h2>Colors</h2>

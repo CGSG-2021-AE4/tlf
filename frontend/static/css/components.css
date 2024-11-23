@@ -62,3 +62,16 @@ button.colorTheme.active, button.colorTheme:active {
 button:hover, button.active:hover {
   transform: scale(1.2);
 }
+
+
+/********** hidden component **********/
+
+.hiddenComponent {
+  transition: max-height 1s;
+  max-height: 1000px;
+  overflow: hidden;
+}
+
+.hiddenComponent.hide {
+  max-height: 0;
+}

@@ -119,7 +119,7 @@ button.iconButton:hover {
 
 /* Color theme buttons */
 button.colorTheme {
-  width: 16em;
+  width: 90%;
 }
 
 button.colorTheme.active, button.colorTheme:active {

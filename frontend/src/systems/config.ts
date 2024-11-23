@@ -11,6 +11,7 @@ interface SettingsConfig {
   hidePlayControls: boolean;
 
   // Frequency indicator
+  freqLinesEnable: boolean;
   freqStartAlignment: FreqStartAlignment;
   freqVertAlignment: VertAlignment;
   freqIsReflect: boolean;
@@ -43,6 +44,7 @@ export const defaultSettings: SettingsConfig = {
   playPageBlur: false,
   hidePlayControls: true,
   // Frequency indicator
+  freqLinesEnable: true,
   freqStartAlignment: "left",
   freqVertAlignment: "center",
   freqIsReflect: false,
