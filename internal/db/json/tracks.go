@@ -1,10 +1,14 @@
 package json
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"math/rand"
+	"net/http"
 	"os"
+	"regexp"
 	"sync"
 
 	"github.com/CGSG-2021-AE4/tlf/api/types"
@@ -32,10 +36,31 @@ func (as *TrackStore) load() error {
 	as.mutex.Lock()
 	defer as.mutex.Unlock()
 
-	bytes, err := os.ReadFile(as.filename)
-	if err != nil {
-		return err
+	// SHIT
+	isUrl, _ := regexp.MatchString("\\S+\\.\\S+/\\S+", as.filename)
+
+	buf := new(bytes.Buffer)
+	var bytes []byte
+
+	if isUrl {
+		res, err := http.Get(as.filename)
+		print("a")
+		if err != nil {
+			return fmt.Errorf("fetch remote file: %w", err)
+		}
+
+		print(res)
+		defer res.Body.Close()
+		buf.ReadFrom(res.Body)
+		bytes = buf.Bytes()
+	} else {
+		buf, err := os.ReadFile(as.filename)
+		if err != nil {
+			return fmt.Errorf("read local file: %w", err)
+		}
+		bytes = buf
 	}
+
 	tracks := []types.TrackDescriptor{}
 	if err := json.Unmarshal(bytes, &tracks); err != nil {
 		return nil
