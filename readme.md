@@ -60,6 +60,12 @@ Settings are stored in global variable **config**. Config can be modified only i
 	- Static image
 	- Just color
 	- **Optional** Color gradient
+# Deploy
+## Build command
+`cd frontend; npm i .; mkdir dist; node esbuild.js; cd ..; go get .; go build -o ./tlf.exe ./cmd/`
+## Start command
+`./tlf.exe --domain 0.0.0.0:80 --track-store-file <json with tracks>`
+
 # Packages
 - **JQuery**
 - **js-cookie**

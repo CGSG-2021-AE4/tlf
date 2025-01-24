@@ -140,7 +140,7 @@ BindRadioButton(
 );
 
 function updateFreqLines() {
-  console.log(config.settings.freqStartAlignment, String(config.settings.freqStartAlignment) == "right");
+  //console.log(config.settings.freqStartAlignment, String(config.settings.freqStartAlignment) == "right");
   if (config.settings.freqLinesEnable) {
     $("#soundLines").removeClass("hidden");
     linesSettingsComponent.toggle(false);
