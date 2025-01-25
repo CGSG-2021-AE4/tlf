@@ -30,7 +30,12 @@ class Player implements PlayerI {
     this.audio = new AudioController({
       onend: () => {
         this.next();
-      }
+      },
+      onplay: () => { this.onplay() },
+      onpause: () => { this.onpause() },
+      onstop: () => {},
+      onmute: () => {},
+      onvolume: () => {},
     });
     this.freqs = new SoundFreqs($("#soundLines"));
     this.playlist = [];
@@ -50,10 +55,8 @@ class Player implements PlayerI {
     await this.next();
   }
 
-  async play() {
-    if (this.isPlaying)
-      return;
-    this.audio.play();
+  onplay() {
+    console.log("onplay")
     this.freqs.play();
     this.startTime = Date.now() / 1000.0;
     this.isPlaying = true;
@@ -64,17 +67,26 @@ class Player implements PlayerI {
     $("#audioPauseButton").removeClass("hidden");  
   }
 
-  async pause() {
-    if (!this.isPlaying)
+  async play() {
+    if (this.isPlaying)
       return;
+    this.audio.play();
+  }
+
+  onpause() {
+    console.log("onpause")
     this.isPlaying = false;
     this.playedTime += Date.now() / 1000.0 - this.startTime;
-    this.audio.pause();
     this.freqs.pause();
-
     // Update html
     $("#audioPauseButton").addClass("hidden");
     $("#audioPlayButton").removeClass("hidden");  
+  }
+
+  async pause() {
+    if (!this.isPlaying)
+      return;
+    this.audio.pause();
   }
 
   async next() {

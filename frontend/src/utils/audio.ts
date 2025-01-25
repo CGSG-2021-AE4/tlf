@@ -32,6 +32,11 @@ interface AudioControllerI extends TrackPlayerI {
 
 export class CallBacks {
   onend: () => void;
+  onplay: () => void;
+  onpause: () => void;
+  onstop: () => void;
+  onmute: () => void;
+  onvolume: () => void;
 }
 
 export class AudioController implements AudioControllerI {
@@ -59,10 +64,15 @@ export class AudioController implements AudioControllerI {
         d.resolve();
       },
       onend: this.callbacks.onend,
+      onplay: this.callbacks.onplay,
+      onpause: this.callbacks.onpause,
+      onstop: this.callbacks.onstop,
+      onmute: this.callbacks.onmute,
+      onvolume: this.callbacks.onvolume,
       onloaderror: (e) => {
         console.log(`Failed to load audio: ${e}`);
         d.resolve();
-      }
+      },
     });
     
     // this.sound.addEventListener("canplaythrough", () => {
